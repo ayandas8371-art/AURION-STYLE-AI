@@ -4,7 +4,7 @@ import { Layout } from '../components/Layout';
 import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card } from '../components/Card';
-import { Mail, Phone, Lock } from 'lucide-react';
+import { Mail, Phone, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { isSupabaseConfigured } from '../lib/supabase';
 import './Login.css';
@@ -84,65 +84,73 @@ export const Login: React.FC = () => {
                 <Card variant="glass" className="login-form-card" padding="lg">
                     <div className="auth-tabs mb-6">
                         <button
+                            type="button"
                             className={`auth-tab ${authMethod === 'email' ? 'active' : ''}`}
+                            aria-pressed={authMethod === 'email'}
                             onClick={() => { setAuthMethod('email'); setError(''); }}
                         >
-                            <Mail size={16} className="mr-2" /> Email
+                            <Mail size={16} /> Email
                         </button>
                         <button
+                            type="button"
                             className={`auth-tab ${authMethod === 'phone' ? 'active' : ''}`}
+                            aria-pressed={authMethod === 'phone'}
                             onClick={() => { setAuthMethod('phone'); setError(''); }}
                         >
-                            <Phone size={16} className="mr-2" /> Phone
+                            <Phone size={16} /> Phone
                         </button>
                     </div>
 
                     <h2 className="login-title">Welcome Back</h2>
-                    <p className="login-subtitle">Sign in to access your luxury wardrobe.</p>
+                    <p className="login-subtitle mb-6">Sign in to access your luxury wardrobe.</p>
 
                     <form onSubmit={handleLogin} className="login-form">
                         {authMethod === 'email' ? (
-                            <div className="input-with-icon relative">
-                                <Mail size={18} className="absolute left-3 top-3 text-gray-400" />
-                                <Input
-                                    placeholder="Email Address"
-                                    type="email"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="pl-10"
-                                />
-                            </div>
+                            <Input
+                                label="Email Address"
+                                icon={<Mail size={18} />}
+                                placeholder="you@example.com"
+                                type="email"
+                                name="email"
+                                autoComplete="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
                         ) : (
-                            <div className="input-with-icon relative">
-                                <Phone size={18} className="absolute left-3 top-3 text-gray-400" />
-                                <Input
-                                    placeholder="Phone Number"
-                                    type="tel"
-                                    value={phone}
-                                    onChange={(e) => setPhone(e.target.value)}
-                                    className="pl-10"
-                                />
-                            </div>
+                            <Input
+                                label="Phone Number"
+                                icon={<Phone size={18} />}
+                                placeholder="+91 98765 43210"
+                                type="tel"
+                                name="phone"
+                                autoComplete="tel"
+                                value={phone}
+                                onChange={(e) => setPhone(e.target.value)}
+                            />
                         )}
 
-                        <div className="input-with-icon relative mt-4">
-                            <Lock size={18} className="absolute left-3 top-3 text-gray-400" />
-                            <Input
-                                placeholder="Password"
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                className="pl-10"
-                            />
-                        </div>
-
-                        {error && <p className="text-red-400 text-sm mt-2 text-center">{error}</p>}
+                        <Input
+                            label="Password"
+                            icon={<Lock size={18} />}
+                            type="password"
+                            name="password"
+                            autoComplete="current-password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
 
                         <div className="form-actions">
-                            <span className="forgot-password">Forgot Password?</span>
+                            <button type="button" className="forgot-password">Forgot Password?</button>
                         </div>
 
-                        <Button type="submit" fullWidth isLoading={loading} className="mt-4">
+                        {error && (
+                            <p className="login-error" role="alert">
+                                <AlertCircle size={14} aria-hidden="true" />
+                                {error}
+                            </p>
+                        )}
+
+                        <Button type="submit" fullWidth isLoading={loading}>
                             Sign In
                         </Button>
 

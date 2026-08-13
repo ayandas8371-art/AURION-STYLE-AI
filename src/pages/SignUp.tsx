@@ -112,16 +112,20 @@ export const SignUp: React.FC = () => {
                     <>
                     <div className="auth-tabs mb-6">
                         <button
+                            type="button"
                             className={`auth-tab ${authMethod === 'email' ? 'active' : ''}`}
+                            aria-pressed={authMethod === 'email'}
                             onClick={() => { setAuthMethod('email'); setError(''); }}
                         >
-                            <Mail size={16} className="mr-2" /> Email
+                            <Mail size={16} /> Email
                         </button>
                         <button
+                            type="button"
                             className={`auth-tab ${authMethod === 'phone' ? 'active' : ''}`}
+                            aria-pressed={authMethod === 'phone'}
                             onClick={() => { setAuthMethod('phone'); setError(''); }}
                         >
-                            <Phone size={16} className="mr-2" /> Phone
+                            <Phone size={16} /> Phone
                         </button>
                     </div>
 
@@ -140,7 +144,7 @@ export const SignUp: React.FC = () => {
                         </div>
 
                         {authMethod === 'email' ? (
-                            <div className="input-with-icon relative mt-4">
+                            <div className="input-with-icon relative">
                                 <Mail size={18} className="absolute left-3 top-3 text-gray-400" />
                                 <Input
                                     placeholder="Email Address"
@@ -151,7 +155,7 @@ export const SignUp: React.FC = () => {
                                 />
                             </div>
                         ) : (
-                            <div className="input-with-icon relative mt-4">
+                            <div className="input-with-icon relative">
                                 <Phone size={18} className="absolute left-3 top-3 text-gray-400" />
                                 <Input
                                     placeholder="Phone Number"
@@ -163,7 +167,7 @@ export const SignUp: React.FC = () => {
                             </div>
                         )}
 
-                        <div className="input-with-icon relative mt-4">
+                        <div className="input-with-icon relative">
                             <Lock size={18} className="absolute left-3 top-3 text-gray-400" />
                             <Input
                                 placeholder="Password"
@@ -174,7 +178,7 @@ export const SignUp: React.FC = () => {
                             />
                         </div>
 
-                        <div className="input-with-icon relative mt-4">
+                        <div className="input-with-icon relative">
                             <Lock size={18} className="absolute left-3 top-3 text-gray-400" />
                             <Input
                                 placeholder="Confirm Password"
@@ -187,7 +191,7 @@ export const SignUp: React.FC = () => {
 
                         {error && <p className="text-red-400 text-sm mt-2 text-center">{error}</p>}
 
-                        <Button type="submit" fullWidth isLoading={loading} className="mt-6">
+                        <Button type="submit" fullWidth isLoading={loading}>
                             Create Account <ArrowRight size={16} className="ml-2" />
                         </Button>
 
