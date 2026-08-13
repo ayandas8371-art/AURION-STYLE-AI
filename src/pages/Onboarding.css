@@ -1,0 +1,232 @@
+.onboarding-page {
+    min-height: 100vh;
+    padding: 24px;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-bar {
+    height: 100%;
+    background: var(--color-gold);
+    transition: width 0.4s ease;
+    box-shadow: 0 0 10px var(--color-gold);
+}
+
+.step-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.step-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.step-header h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.step-header p {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.photo-upload-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    margin-bottom: 32px;
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.photo-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-gold);
+}
+
+.step-footer {
+    margin-top: auto;
+    margin-bottom: 24px;
+}
+
+/* Form Elements */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.pill-group {
+    display: flex;
+    gap: 12px;
+}
+
+.pill-group-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.pill {
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: var(--color-charcoal-light);
+    border: 1px solid var(--color-charcoal);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.pill.active {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.pill-lg {
+    padding: 16px;
+    font-size: 16px;
+}
+
+.slider {
+    width: 100%;
+    accent-color: var(--color-gold);
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 3px;
+    outline: none;
+}
+
+/* Occasions Grid */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.occasion-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    gap: 12px;
+    cursor: pointer;
+    position: relative;
+    border: 1px solid transparent;
+}
+
+.occasion-card.selected {
+    border-color: var(--color-gold);
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.check-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--color-gold);
+}
+
+.budget-display {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 32px;
+    color: var(--color-gold);
+}
+
+/* Processing */
+.processing-screen {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.processing-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loading-ring {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-top-color: var(--color-gold);
+    animation: spin 1s linear infinite;
+}
+
+.processing-steps {
+    margin-top: 24px;
+    text-align: left;
+    opacity: 0.7;
+}
+
+.step-item {
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    opacity: 0;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.step-item::before {
+    content: 'Expected';
+    /* content: '✓'; Use a check later */
+    opacity: 0;
+}
+
+.delayed-1 {
+    animation-delay: 1s;
+}
+
+.delayed-2 {
+    animation-delay: 2s;
+}

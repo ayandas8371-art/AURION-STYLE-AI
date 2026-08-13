@@ -1,0 +1,277 @@
+.wizardContainer {
+    min-height: 100vh;
+    background-color: var(--color-black);
+    color: var(--color-text-primary);
+    font-family: var(--font-body);
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Image Layer */
+.dynamicBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 0;
+    transition: background-image var(--transition-smooth);
+    opacity: 0.7;
+    /* Dim the luxury background slightly to ensure contrast */
+}
+
+.dynamicBackground::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(2, 2, 2, 0.4) 0%, rgba(2, 2, 2, 0.9) 100%);
+    pointer-events: none;
+}
+
+/* Content Layer */
+.contentLayer {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: var(--spacing-sm) 0;
+}
+
+.headerContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.backButton {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: color var(--transition-fast);
+}
+
+.backButton:hover {
+    color: var(--color-gold);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-gold);
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+}
+
+.stepIndicatorInfo {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+}
+
+/* Progress Bar */
+.progressBarContainer {
+    height: 4px;
+    background-color: var(--color-charcoal-light);
+    width: 100%;
+}
+
+.progressBarFill {
+    height: 100%;
+    background: var(--gradient-gold);
+    transition: width var(--transition-smooth);
+}
+
+/* Step Headers (The numbers at the top) */
+.stepsNav {
+    max-width: 1200px;
+    margin: var(--spacing-lg) auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+}
+
+.stepNavItem {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.stepNavItem.active {
+    color: var(--color-text-primary);
+}
+
+.stepNavItem.completed {
+    color: var(--color-gold);
+}
+
+.stepNumber {
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--color-text-muted);
+    transition: all var(--transition-fast);
+}
+
+.stepNavItem.active .stepNumber {
+    background: var(--gradient-gold);
+    border-color: transparent;
+    color: var(--color-black);
+}
+
+.stepNavItem.completed .stepNumber {
+    background-color: rgba(212, 175, 55, 0.1);
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.stepText {
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .stepText {
+        display: block;
+    }
+
+    .stepsNav {
+        gap: var(--spacing-xl);
+    }
+}
+
+.stepTitle {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin: 0;
+}
+
+.stepSubtitle {
+    font-size: 0.75rem;
+    margin: 0;
+    opacity: 0.7;
+}
+
+/* Main Content Area */
+.mainContent {
+    flex: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    width: 100%;
+    padding: var(--spacing-lg) var(--spacing-sm);
+    box-sizing: border-box;
+}
+
+@media (min-width: 768px) {
+    .mainContent {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+}
+
+/* Buttons */
+.footerNav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: var(--spacing-2xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--glass-border);
+}
+
+/* Reusing the global btn classes instead of custom ones here,
+   but we'll keep wrappers for layout */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-full);
+    font-family: var(--font-body);
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    height: 48px;
+    padding: 0 24px;
+    font-size: 13px;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btnBack {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-text-muted);
+}
+
+.btnBack:hover:not(:disabled) {
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+}
+
+.btnNext {
+    background: var(--gradient-gold);
+    color: var(--color-black);
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+    border: 1px solid var(--color-gold-light);
+}
+
+.btnNext:hover:not(:disabled) {
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.6);
+    transform: translateY(-2px) scale(1.02);
+    filter: brightness(1.1);
+}
+
+.validationMessage {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background-color: rgba(212, 175, 55, 0.05);
+    color: var(--color-gold);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    border: 1px solid var(--color-gold-dark);
+    backdrop-filter: blur(12px);
+}

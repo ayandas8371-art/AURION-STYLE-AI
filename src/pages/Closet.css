@@ -1,0 +1,121 @@
+.closet-page {
+    padding: 24px;
+    padding-bottom: 40px;
+}
+
+.closet-header {
+    margin-top: 16px;
+    margin-bottom: 24px;
+}
+
+.page-title {
+    font-family: var(--font-heading);
+    font-size: 32px;
+    margin-bottom: 4px;
+    color: var(--color-gold);
+}
+
+.page-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+.filter-scroll {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+}
+
+.filter-chip {
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: var(--color-charcoal-light);
+    border: 1px solid var(--color-charcoal);
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.filter-chip.active {
+    background: var(--color-gold);
+    color: var(--color-black);
+    font-weight: 600;
+    border-color: var(--color-gold);
+}
+
+.closet-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.closet-item {
+    position: relative;
+}
+
+.item-image {
+    aspect-ratio: 3/4;
+    background: var(--color-charcoal-light);
+    position: relative;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.placeholder-art {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: #151515;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.closet-item:hover .delete-btn {
+    opacity: 1;
+}
+
+.item-details {
+    padding: 12px;
+}
+
+.item-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.item-meta {
+    font-size: 11px;
+    color: var(--color-text-muted);
+}
+
+.mb-6 {
+    margin-bottom: 24px;
+}

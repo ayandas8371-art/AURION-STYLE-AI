@@ -1,0 +1,92 @@
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+    background: radial-gradient(circle at top right, #1a1a1a 0%, #000000 100%);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.brand-logo {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.brand-tagline {
+    font-family: var(--font-subheading);
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    font-style: italic;
+}
+
+.login-title {
+    font-family: var(--font-heading);
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+.login-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    margin-bottom: 24px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.forgot-password {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+}
+
+.forgot-password:hover {
+    color: var(--color-gold);
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 24px 0;
+    color: var(--color-text-secondary);
+    font-size: 12px;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.divider span {
+    padding: 0 12px;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.mt-4 {
+    margin-top: 16px;
+}

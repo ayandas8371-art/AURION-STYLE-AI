@@ -1,0 +1,210 @@
+.formContainer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xl);
+    padding: var(--spacing-sm);
+    animation: fadeIn var(--transition-smooth);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header {
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.iconWrapper {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto var(--spacing-md);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-gold);
+    box-shadow: 0 4px 15px rgba(212, 175, 55, 0.1);
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    color: var(--color-gold);
+    margin: 0 0 var(--spacing-sm) 0;
+}
+
+.subtitle {
+    color: var(--color-text-secondary);
+    font-size: 0.9375rem;
+    max-width: 400px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Preset List (Height, Options) */
+.presetList {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    max-width: 500px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.presetBtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-lg);
+    background: var(--color-charcoal);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    text-align: left;
+}
+
+.presetBtn:hover {
+    border-color: var(--color-gold-muted);
+    background: var(--color-charcoal-light);
+    transform: translateY(-1px);
+}
+
+.presetBtn.active {
+    background: rgba(212, 175, 55, 0.05);
+    border-color: var(--color-gold);
+}
+
+.presetLabel {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.presetBtn.active .presetLabel {
+    color: var(--color-gold);
+}
+
+.radioCircle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.presetBtn.active .radioCircle {
+    border-color: var(--color-gold);
+}
+
+.radioInner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-gold);
+}
+
+/* Visual Grid (Body Type, Skin Tone) */
+.visualGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+    max-width: 700px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .visualGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.visualCard {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl) var(--spacing-md);
+    cursor: pointer;
+    transition: all var(--transition-smooth);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    text-align: center;
+    box-shadow: var(--glass-shadow);
+}
+
+.visualCard:hover {
+    border-color: var(--color-gold-muted);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
+.visualCard.active {
+    border-color: var(--color-gold);
+    background: rgba(212, 175, 55, 0.05);
+}
+
+.visualIcon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--color-charcoal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+}
+
+.visualCard.active .visualIcon,
+.visualCard:hover .visualIcon {
+    color: var(--color-gold);
+}
+
+/* Swatch styling for Skin Tone / Hair Color */
+.swatchIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--color-charcoal);
+    transition: all var(--transition-fast);
+}
+
+.visualCard.active .swatchIcon {
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.5), 0 0 0 2px var(--color-gold), 0 0 15px rgba(212, 175, 55, 0.3);
+}
+
+.visualTitle {
+    color: var(--color-text-primary);
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+.visualCard.active .visualTitle {
+    color: var(--color-gold);
+}
+
+/* Form Section Wrapper */
+.sectionWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2xl);
+}

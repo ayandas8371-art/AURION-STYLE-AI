@@ -1,0 +1,607 @@
+/* Home Container */
+.home-container {
+    padding-bottom: 90px;
+    overflow-x: hidden;
+    position: relative;
+    /* Ensure relative context */
+    /* Removed background on container to fix zoom issue */
+}
+
+/* Fixed Background constrained to App Width */
+.home-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 480px;
+    /* Match Layout.css constraint */
+    height: 100vh;
+    background: url('../assets/home-bg.png') no-repeat center top;
+    background-size: 100% 100%;
+    /* Force fit to the app view */
+    pointer-events: none;
+    z-index: 0;
+    /* Sit behind content */
+}
+
+/* Ensure content sits above background */
+.home-container>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    /* Transparent to show fixed background */
+    background: transparent;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/hero-sparkle.png') no-repeat top center;
+    background-size: 100% auto;
+    opacity: 0.4;
+    mix-blend-mode: screen;
+    z-index: 1;
+    pointer-events: none;
+    mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 80%);
+}
+
+.hero-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Center everything */
+    justify-content: center;
+    gap: 40px;
+    padding: 60px 24px;
+    max-width: 900px;
+    /* Constrain width for single column */
+    margin: 0 auto;
+    min-height: 80vh;
+    /* Ensure it takes up good screen space */
+}
+
+/* Tablet/Desktop Grid - Override previous split */
+@media (min-width: 900px) {
+    .hero-grid {
+        display: flex;
+        /* Keep flex, no grid needed now */
+        padding: 80px 48px;
+    }
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    width: 100%;
+}
+
+/* New Info Card Styles */
+.hero-info-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 20px;
+    padding: 16px;
+    /* Tighter padding */
+    margin-bottom: 32px;
+    max-width: 260px;
+    /* Smaller card width */
+    width: 100%;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-info-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-color: var(--color-gold);
+}
+
+.info-card-img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    /* Square to match Feature Cards */
+    border-radius: 12px;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: none;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.info-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-description {
+    color: var(--color-gold);
+    /* Standard Gold */
+    font-family: 'Libre Baskerville', serif;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: italic;
+    text-align: center;
+    line-height: 1.6;
+    margin-top: 16px;
+    letter-spacing: 0.02em;
+}
+
+/* Mobile Adjustments for Info Card */
+@media (max-width: 600px) {
+    .hero-info-card {
+        flex-direction: column;
+        border-radius: 24px;
+        /* Standard card on mobile */
+        padding: 24px;
+        text-align: center;
+    }
+
+    .hero-description {
+        text-align: center;
+    }
+
+    .info-card-img {
+        width: 100%;
+        height: 200px;
+        /* Larger image on mobile */
+        border-radius: 12px;
+    }
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Mobile: Center */
+    text-align: center;
+    z-index: 10;
+}
+
+/* Hero Image Container */
+.hero-image-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.hero-image-card {
+    position: relative;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    aspect-ratio: 3/4;
+    /* Taller, elegant portrait ratio */
+    width: 100%;
+    max-width: 450px;
+    transform: rotate(-2deg);
+    /* Subtle stylish tilt */
+    transition: transform 0.5s ease;
+}
+
+.hero-image-card:hover {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.hero-main-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.hero-glow {
+    position: absolute;
+    inset: -40px;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.2), transparent 70%);
+    z-index: -1;
+    filter: blur(40px);
+    animation: pulse-glow 4s infinite alternate;
+}
+
+@keyframes pulse-glow {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: scale(1.05);
+    }
+}
+
+/* Premium Badge Styling */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 24px;
+    background: linear-gradient(90deg, rgba(212, 175, 55, 0.05) 0%, rgba(212, 175, 55, 0.15) 50%, rgba(212, 175, 55, 0.05) 100%);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+    border-radius: 50px;
+    /* Full pill shape */
+    color: var(--color-gold);
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    margin-bottom: 32px;
+    margin-left: auto;
+    /* Ensure centering in flex containers */
+    margin-right: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Shimmer effect for badge */
+.hero-badge::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: skewX(-20deg);
+    animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    20% {
+        left: 200%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: 48px;
+    /* Larger title */
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 900px) {
+    .hero-title {
+        font-size: 64px;
+        /* Massive luxury heading */
+    }
+}
+
+.hero-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 16px;
+    max-width: 480px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+}
+
+.hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 320px;
+    margin-bottom: 40px;
+}
+
+.hero-social-proof {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 8px 16px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.stars {
+    color: var(--color-gold);
+    letter-spacing: 2px;
+}
+
+.divider-dot {
+    color: var(--color-text-muted);
+}
+
+/* Section Containers */
+.section-container {
+    padding: 48px 24px 0;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.section-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+/* Feature Grid */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.feature-card {
+    text-align: center;
+    transition: transform 0.3s ease;
+    overflow: hidden;
+    height: 100%;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-gold);
+}
+
+.feature-img-wrapper {
+    width: 100%;
+    aspect-ratio: 1/1;
+    /* Square as requested */
+    overflow: hidden;
+    position: relative;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.feature-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.feature-card:hover .feature-img-wrapper img {
+    transform: scale(1.1);
+}
+
+.feature-content {
+    padding: 20px 16px;
+    position: relative;
+}
+
+.feature-icon {
+    width: 36px;
+    height: 36px;
+    margin: -38px auto 12px;
+    /* Pull up to overlap image slightly */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Hyper-Premium Metallic Gold (Lightened) */
+    background: linear-gradient(135deg, #faeebf 0%, #dcb948 50%, var(--color-gold) 100%);
+    /* Subtle rim light border (Gold Tint) */
+    /* No Border to remove any halo defect */
+    border: none;
+    border-radius: 50%;
+    color: var(--color-black);
+    position: relative;
+    z-index: 2;
+    /* Pure Gold Glow - No White Insets */
+    box-shadow: 0 10px 20px -5px rgba(220, 188, 75, 0.5), 0 0 15px rgba(175, 143, 42, 0.3);
+}
+
+.feature-card h3 {
+    font-size: 14px;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.feature-card p {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+/* Product Grid (Trending) */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.product-card {
+    background: transparent;
+}
+
+.product-image-wrapper {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: 12px;
+    aspect-ratio: 3/4;
+}
+
+.product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.05);
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: var(--color-gold);
+    color: black;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.wishlist-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: white;
+}
+
+.product-details h4 {
+    font-size: 13px;
+    font-family: var(--font-body);
+    font-weight: 500;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.brand-name {
+    font-size: 10px;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.price-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 13px;
+}
+
+.current-price {
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.original-price {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+    font-size: 11px;
+}
+
+.badge-pill {
+    display: inline-block;
+    padding: 8px 16px;
+    /* Bigger padding */
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 50px;
+    color: var(--color-gold);
+    font-size: 11px;
+    /* Bigger font */
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: rgba(212, 175, 55, 0.08);
+    /* Premium tint */
+    backdrop-filter: blur(5px);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.1);
+    white-space: nowrap;
+}
+
+/* Custom Flex Header */
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Align centers */
+    margin-bottom: 24px;
+}
+
+/* Inspiration Grid */
+.inspiration-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+    gap: 12px;
+}
+
+.inspire-item {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 180px;
+}
+
+.inspire-item.tall {
+    grid-row: span 2;
+    height: 372px;
+    /* 180*2 + 12 gap */
+}
+
+.inspire-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.inspire-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+}
+
+.inspire-overlay span {
+    font-family: var(--font-heading);
+    color: white;
+    font-size: 16px;
+}
+
+/* CTA Section */
+.cta-section {
+    padding: 48px 24px;
+}
+
+.cta-card {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(0, 0, 0, 0.95));
+    border: 1px solid rgba(212, 175, 55, 0.2);
+}
