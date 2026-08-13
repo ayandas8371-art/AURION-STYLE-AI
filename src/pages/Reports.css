@@ -1,5 +1,10 @@
 .reports-page {
     padding-bottom: 24px;
+    background-color: var(--color-black);
+    background-image: url('../assets/Gemini_Generated_Image_90i3dm90i3dm90i3.png');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: cover;
 }
 
 /* ============ Report Cover / Hero ============ */
@@ -287,6 +292,13 @@
 /* ============ CTAs ============ */
 .report-actions {
     margin-top: 8px;
+    padding: 20px 12px 4px;
+    border-radius: var(--radius-lg);
+    /* The atmospheric background is brightest near the bottom of the page,
+       right where this section sits. The primary button is fully opaque
+       gold and unaffected, but the transparent-fill secondary button needs
+       a little extra contrast here - kept subtle so the glow stays visible. */
+    background: radial-gradient(ellipse at center, rgba(2, 2, 2, 0.4) 0%, rgba(2, 2, 2, 0.15) 65%, transparent 100%);
 }
 
 .mt-4 {
