@@ -111,9 +111,9 @@ export const StyleWizard = () => {
                 {/* Header */}
                 <header className={styles.header}>
                     <div className={styles.headerContent}>
-                        <button onClick={() => navigate('/home')} className={styles.backButton}>
+                        <button onClick={() => navigate('/home')} className={styles.backButton} aria-label="Back to Home">
                             <ArrowLeft size={20} />
-                            <span className="hidden sm:inline">Back to Home</span>
+                            <span className={styles.backButtonLabel}>Back to Home</span>
                         </button>
 
                         <div className={styles.brand}>

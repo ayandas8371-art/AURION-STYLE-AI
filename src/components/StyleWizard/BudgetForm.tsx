@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Wallet, IndianRupee, Lightbulb } from 'lucide-react';
 import styles from './BudgetForm.module.css';
 
@@ -16,12 +16,72 @@ const budgetRanges = [
     { label: "Luxury", min: 50000, max: 100000, description: "Top-tier fashion" },
 ];
 
+const ABSOLUTE_MIN = 1000;
+const ABSOLUTE_MAX = 100000;
+const STEP = 1000;
+
 const BudgetForm: React.FC<BudgetFormProps> = ({
     budgetMin,
     budgetMax,
     onBudgetMinChange,
     onBudgetMaxChange,
 }) => {
+    // Editing state is a plain string so the field can be temporarily empty
+    // (or mid-typed) without being forced back to "0" on every keystroke -
+    // that forced coercion (Number(e.target.value) on each change) was the
+    // cause of the leading-zero bug. The numeric budgetMin/budgetMax props
+    // remain the single source of truth; these just mirror them for display
+    // while editing, and resync whenever the prop changes from elsewhere
+    // (slider drag, preset click).
+    const [minInput, setMinInput] = useState(String(budgetMin));
+    const [maxInput, setMaxInput] = useState(String(budgetMax));
+
+    useEffect(() => {
+        setMinInput(String(budgetMin));
+    }, [budgetMin]);
+
+    useEffect(() => {
+        setMaxInput(String(budgetMax));
+    }, [budgetMax]);
+
+    const handleMinInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const raw = e.target.value;
+        if (raw !== '' && !/^\d+$/.test(raw)) return; // reject non-numeric/negative input
+        const cleaned = raw.replace(/^0+(?=\d)/, ''); // strip leading zeros, e.g. pasted "007000"
+        setMinInput(cleaned);
+        if (cleaned === '') return; // allow a temporarily empty field while editing
+        const num = Number(cleaned);
+        if (num < budgetMax) {
+            onBudgetMinChange(num);
+        }
+    };
+
+    const handleMinBlur = () => {
+        const num = minInput === '' ? budgetMin : Number(minInput);
+        const clamped = Math.min(Math.max(num, ABSOLUTE_MIN), budgetMax - STEP);
+        onBudgetMinChange(clamped);
+        setMinInput(String(clamped));
+    };
+
+    const handleMaxInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const raw = e.target.value;
+        if (raw !== '' && !/^\d+$/.test(raw)) return;
+        const cleaned = raw.replace(/^0+(?=\d)/, '');
+        setMaxInput(cleaned);
+        if (cleaned === '') return;
+        const num = Number(cleaned);
+        if (num > budgetMin) {
+            onBudgetMaxChange(num);
+        }
+    };
+
+    const handleMaxBlur = () => {
+        const num = maxInput === '' ? budgetMax : Number(maxInput);
+        const clamped = Math.max(Math.min(num, ABSOLUTE_MAX), budgetMin + STEP);
+        onBudgetMaxChange(clamped);
+        setMaxInput(String(clamped));
+    };
+
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('en-IN', {
             style: 'currency',
@@ -122,29 +182,35 @@ const BudgetForm: React.FC<BudgetFormProps> = ({
                 {/* Manual Input Fields */}
                 <div className={styles.manualInputs}>
                     <div className={styles.inputGroup}>
-                        <label className={styles.inputLabel}>Minimum</label>
+                        <label className={styles.inputLabel} htmlFor="budget-min-input">Minimum</label>
                         <div className={styles.inputWrapper}>
                             <IndianRupee className={styles.rupeeIcon} size={14} />
                             <input
+                                id="budget-min-input"
                                 type="number"
-                                value={budgetMin}
-                                onChange={(e) => onBudgetMinChange(Number(e.target.value))}
-                                min={1000}
-                                max={budgetMax - 1000}
+                                inputMode="numeric"
+                                value={minInput}
+                                onChange={handleMinInputChange}
+                                onBlur={handleMinBlur}
+                                min={ABSOLUTE_MIN}
+                                max={budgetMax - STEP}
                                 className={styles.numberInput}
                             />
                         </div>
                     </div>
                     <div className={styles.inputGroup}>
-                        <label className={styles.inputLabel}>Maximum</label>
+                        <label className={styles.inputLabel} htmlFor="budget-max-input">Maximum</label>
                         <div className={styles.inputWrapper}>
                             <IndianRupee className={styles.rupeeIcon} size={14} />
                             <input
+                                id="budget-max-input"
                                 type="number"
-                                value={budgetMax}
-                                onChange={(e) => onBudgetMaxChange(Number(e.target.value))}
-                                min={budgetMin + 1000}
-                                max={100000}
+                                inputMode="numeric"
+                                value={maxInput}
+                                onChange={handleMaxInputChange}
+                                onBlur={handleMaxBlur}
+                                min={budgetMin + STEP}
+                                max={ABSOLUTE_MAX}
                                 className={styles.numberInput}
                             />
                         </div>
