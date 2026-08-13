@@ -5,12 +5,13 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card } from '../components/Card';
 import { Mail, Phone, User, Lock, ArrowRight } from 'lucide-react';
-import { auth, googleProvider, isConfigured } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
+import { isSupabaseConfigured } from '../lib/supabase';
 import './Login.css';
 
 export const SignUp: React.FC = () => {
     const navigate = useNavigate();
+    const { signUp, signInWithGoogle } = useAuth();
     const [authMethod, setAuthMethod] = useState<'email' | 'phone'>('email');
     const [loading, setLoading] = useState(false);
 
@@ -21,6 +22,7 @@ export const SignUp: React.FC = () => {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
+    const [signupComplete, setSignupComplete] = useState(false);
 
     const validateForm = () => {
         if (!name.trim()) return "Full Name is required";
@@ -28,7 +30,7 @@ export const SignUp: React.FC = () => {
         if (authMethod === 'email') {
             if (!email.includes('@')) return "Please enter a valid email address";
         } else {
-            if (phone.length < 10) return "Please enter a valid phone number";
+            return "Phone sign-up is not available yet. Please use email.";
         }
 
         if (password.length < 6) return "Password must be at least 6 characters";
@@ -37,7 +39,7 @@ export const SignUp: React.FC = () => {
         return null;
     };
 
-    const handleSignUp = (e: React.FormEvent) => {
+    const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
@@ -47,32 +49,44 @@ export const SignUp: React.FC = () => {
             return;
         }
 
+        if (!isSupabaseConfigured()) {
+            setError('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.');
+            return;
+        }
+
         setLoading(true);
-        // Simulate API call for now (since we don't have email/phone auth backend setup yet)
-        setTimeout(() => {
-            setLoading(false);
+        const { error: signUpError, needsEmailConfirmation } = await signUp(email, password, name.trim());
+        setLoading(false);
+
+        if (signUpError) {
+            setError(signUpError.message || 'Could not create your account. Please try again.');
+            return;
+        }
+
+        if (needsEmailConfirmation) {
+            setSignupComplete(true);
+        } else {
             navigate('/home');
-        }, 1500);
+        }
     };
 
     const handleGoogleLogin = async () => {
         setError('');
 
-        if (!isConfigured()) {
-            setError('Firebase is not configured. Please add your keys to src/lib/firebase.ts');
+        if (!isSupabaseConfigured()) {
+            setError('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.');
             return;
         }
 
         setLoading(true);
-        try {
-            await signInWithPopup(auth, googleProvider);
-            navigate('/home');
-        } catch (err: any) {
-            console.error(err);
+        const { error: googleError } = await signInWithGoogle();
+        setLoading(false);
+
+        if (googleError) {
+            console.error(googleError);
             setError('Google Sign In failed. Please try again.');
-        } finally {
-            setLoading(false);
         }
+        // On success, Supabase redirects to the OAuth provider; navigation happens on return.
     };
 
     return (
@@ -84,6 +98,18 @@ export const SignUp: React.FC = () => {
                 </div>
 
                 <Card variant="glass" className="login-form-card" padding="lg">
+                    {signupComplete ? (
+                        <>
+                            <h2 className="login-title">Check Your Email</h2>
+                            <p className="login-subtitle mb-6">
+                                We sent a confirmation link to <strong>{email}</strong>. Verify your address to finish creating your account, then sign in.
+                            </p>
+                            <Button type="button" fullWidth onClick={() => navigate('/login')}>
+                                Go to Sign In
+                            </Button>
+                        </>
+                    ) : (
+                    <>
                     <div className="auth-tabs mb-6">
                         <button
                             className={`auth-tab ${authMethod === 'email' ? 'active' : ''}`}
@@ -179,6 +205,8 @@ export const SignUp: React.FC = () => {
                             Sign up with Google
                         </Button>
                     </form>
+                    </>
+                    )}
                 </Card>
 
                 <div className="login-footer">

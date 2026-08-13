@@ -5,12 +5,13 @@ import { Button } from '../components/Button';
 import { Input } from '../components/Input';
 import { Card } from '../components/Card';
 import { Mail, Phone, Lock } from 'lucide-react';
-import { auth, googleProvider, isConfigured } from '../lib/firebase';
-import { signInWithPopup } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
+import { isSupabaseConfigured } from '../lib/supabase';
 import './Login.css';
 
 export const Login: React.FC = () => {
     const navigate = useNavigate();
+    const { signIn, signInWithGoogle } = useAuth();
     const [authMethod, setAuthMethod] = useState<'email' | 'phone'>('email');
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
@@ -18,7 +19,7 @@ export const Login: React.FC = () => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
 
@@ -27,8 +28,8 @@ export const Login: React.FC = () => {
             setError('Please enter a valid email address');
             return;
         }
-        if (authMethod === 'phone' && phone.length < 10) {
-            setError('Please enter a valid phone number');
+        if (authMethod === 'phone') {
+            setError('Phone sign-in is not available yet. Please use email.');
             return;
         }
         if (!password) {
@@ -36,32 +37,40 @@ export const Login: React.FC = () => {
             return;
         }
 
+        if (!isSupabaseConfigured()) {
+            setError('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.');
+            return;
+        }
+
         setLoading(true);
-        // Simulate API call
-        setTimeout(() => {
-            setLoading(false);
-            navigate('/home');
-        }, 1500);
+        const { error: signInError } = await signIn(email, password);
+        setLoading(false);
+
+        if (signInError) {
+            setError(signInError.message || 'Invalid email or password.');
+            return;
+        }
+
+        navigate('/home');
     };
 
     const handleGoogleLogin = async () => {
         setError('');
 
-        if (!isConfigured()) {
-            setError('Firebase is not configured. Please add your keys to src/lib/firebase.ts');
+        if (!isSupabaseConfigured()) {
+            setError('Supabase is not configured. Please set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY.');
             return;
         }
 
         setLoading(true);
-        try {
-            await signInWithPopup(auth, googleProvider);
-            navigate('/home');
-        } catch (err: any) {
-            console.error(err);
+        const { error: googleError } = await signInWithGoogle();
+        setLoading(false);
+
+        if (googleError) {
+            console.error(googleError);
             setError('Google Sign In failed. Please try again.');
-        } finally {
-            setLoading(false);
         }
+        // On success, Supabase redirects to the OAuth provider; navigation happens on return.
     };
 
     return (

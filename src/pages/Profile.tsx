@@ -1,29 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { Crown, LogOut, ChevronRight, User, Bell, HelpCircle, Shield } from 'lucide-react';
-import { auth } from '../lib/firebase';
-import { signOut } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
 import './Profile.css';
 
 export const Profile: React.FC = () => {
     const navigate = useNavigate();
-    const [user, setUser] = useState(auth.currentUser);
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((u) => {
-            setUser(u);
-        });
-        return () => unsubscribe();
-    }, []);
+    const { user, signOut } = useAuth();
+    const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Aurion Guest';
+    const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture || '';
 
     const handleSignOut = async () => {
-        try {
-            await signOut(auth);
-            navigate('/login');
-        } catch (error) {
-            console.error("Error signing out:", error);
-        }
+        await signOut();
+        navigate('/login');
     };
 
     const plans = [
@@ -50,16 +40,16 @@ export const Profile: React.FC = () => {
                 <div className="profile-header">
                     <div className="avatar-container">
                         <div className="avatar-circle">
-                            {user?.photoURL ? (
-                                <img src={user.photoURL} alt={user.displayName || 'User'} className="avatar-img" />
+                            {avatarUrl ? (
+                                <img src={avatarUrl} alt={displayName} className="avatar-img" />
                             ) : (
-                                <span className="text-3xl font-serif">{user?.displayName?.[0] || 'A'}</span>
+                                <span className="text-3xl font-serif">{displayName[0]}</span>
                             )}
                         </div>
                         <div className="avatar-glow"></div>
                     </div>
 
-                    <h2 className="profile-name">{user?.displayName || 'Aurion Guest'}</h2>
+                    <h2 className="profile-name">{displayName}</h2>
                     <p className="profile-email">{user?.email || 'guest@example.com'}</p>
 
                     <div className="member-badge">
