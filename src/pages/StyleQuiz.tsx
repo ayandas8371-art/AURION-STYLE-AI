@@ -64,6 +64,31 @@ export const StyleQuiz = () => {
         }
     };
 
+    const getValidationMessage = () => {
+        switch (currentStep) {
+            case 1:
+                return !quizData.gender ? 'Please select your gender' : '';
+            case 2: {
+                const missing = [];
+                if (!quizData.bodyType) missing.push('body type');
+                if (!quizData.skinTone) missing.push('skin tone');
+                if (!quizData.hairColor) missing.push('hair color');
+                return missing.length > 0 ? `Please select your ${missing.join(', ')}` : '';
+            }
+            case 3:
+                if (!quizData.occasion && !quizData.season) return 'Please select an occasion and season';
+                if (!quizData.occasion) return 'Please select an occasion';
+                if (!quizData.season) return 'Please select a season';
+                return '';
+            case 4:
+                return !(quizData.budgetMin > 0 && quizData.budgetMax > quizData.budgetMin)
+                    ? 'Please set a valid budget range'
+                    : '';
+            default:
+                return '';
+        }
+    };
+
     const generateReport = async () => {
         setIsGenerating(true);
         // Simulate API call to the Edge Function edge
@@ -173,6 +198,13 @@ export const StyleQuiz = () => {
                         </div>
                     )}
 
+                    {!isStepValid() && getValidationMessage() && (
+                        <div className={styles.validationMessage}>
+                            <AlertCircle size={20} />
+                            <span>{getValidationMessage()}</span>
+                        </div>
+                    )}
+
                     <div className={styles.footerNav}>
                         <button
                             className={`${styles.btn} ${styles.btnBack}`}
@@ -185,6 +217,7 @@ export const StyleQuiz = () => {
                         <button
                             className={`${styles.btn} ${styles.btnNext}`}
                             onClick={handleNext}
+                            disabled={!isStepValid()}
                         >
                             {currentStep === 4 ? (
                                 <>
