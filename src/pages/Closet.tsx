@@ -25,14 +25,6 @@ export const Closet: React.FC = () => {
                     className="closet-hero"
                     style={{
                         backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.3), #0a0a0a), url(${storeInterior})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                        height: '200px',
-                        marginBottom: '2rem',
-                        borderRadius: '0 0 24px 24px',
-                        display: 'flex',
-                        alignItems: 'flex-end',
-                        padding: '1.5rem'
                     }}
                 >
                     <div>

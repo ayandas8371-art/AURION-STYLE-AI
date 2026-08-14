@@ -612,8 +612,10 @@
    ========================================================================== */
 @media (min-width: 1024px) {
     .home-container::before {
-        max-width: 1920px;
+        background-image: url('../assets/home_page_BG_desktop.png');
+        background-position: center;
         background-size: cover;
+        max-width: 1920px;
     }
 
     .hero-grid {
@@ -697,6 +699,12 @@
     }
 
     .cta-card {
-        padding: 64px 48px;
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 64px 56px;
+    }
+
+    .cta-card .max-w-xs {
+        max-width: 320px;
     }
 }

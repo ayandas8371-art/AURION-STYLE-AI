@@ -3,6 +3,17 @@
     padding-bottom: 40px;
 }
 
+.closet-hero {
+    background-size: cover;
+    background-position: center;
+    height: 200px;
+    margin-bottom: 2rem;
+    border-radius: 0 0 24px 24px;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.5rem;
+}
+
 .closet-header {
     margin-top: 16px;
     margin-bottom: 24px;
@@ -128,9 +139,21 @@
         max-width: 1400px;
         margin: 0 auto;
         padding: 40px 48px 64px;
+        background-image: url('../assets/Closet_background_BG_edsktop.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        background-attachment: fixed;
     }
 
-    .page-title {
+    .closet-hero {
+        height: 320px;
+        border-radius: 24px;
+        padding: 2.5rem 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .closet-hero h1 {
         font-size: 40px;
     }
 

@@ -248,6 +248,14 @@
    the existing 768px/1024px grid-column breakpoints) are untouched.
    ========================================================================== */
 @media (min-width: 1024px) {
+    .explore-page {
+        background-image: url('../assets/Explore_page_BG_desktop.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
+
     .explore-hero {
         padding: 64px 48px 80px;
     }
