@@ -222,7 +222,7 @@ const Index = () => {
       <section className="relative z-10 container mx-auto px-4 py-16">
         <div className={`text-center mb-12 transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">
-            How <span className="text-gradient-gold">LuxFit AI</span> Works
+            How <span className="text-gradient-gold">AURION AI</span> Works
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto">
             Our intelligent styling engine combines AI with fashion expertise
@@ -259,7 +259,7 @@ const Index = () => {
               Ready to Transform Your Style?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-lg mx-auto">
-              Join thousands of fashion-forward individuals who've discovered their perfect look with LuxFit AI
+              Join thousands of fashion-forward individuals who've discovered their perfect look with AURION AI
             </p>
             <Button variant="luxury" size="xl" onClick={() => navigate("/style-wizard")}>
               <Sparkles className="w-5 h-5 mr-2" />
@@ -274,10 +274,10 @@ const Index = () => {
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center gap-2 mb-4">
             <Sparkles className="w-5 h-5 text-primary" />
-            <span className="font-serif text-xl">LuxFit AI</span>
+            <span className="font-serif text-xl">AURION AI</span>
           </div>
           <p className="text-sm text-muted-foreground">
-            © 2024 LuxFit AI. Your Personal Style Curator.
+            © 2024 AURION AI. Your Personal Style Curator.
           </p>
         </div>
       </footer>

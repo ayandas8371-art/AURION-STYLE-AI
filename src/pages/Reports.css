@@ -316,3 +316,36 @@
 .p-4 {
     padding: 16px;
 }
+
+/* ==========================================================================
+   Desktop composition (Layout `wide`). Mobile rules above are untouched.
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .reports-page {
+        background-size: cover;
+    }
+
+    .report-hero {
+        max-width: 1080px;
+        margin: 32px auto 40px;
+        aspect-ratio: 21 / 9;
+    }
+
+    .report-title {
+        font-size: 40px;
+    }
+
+    .reports-body {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 48px;
+    }
+
+    .identity-card {
+        padding: 48px;
+    }
+
+    .dossier-grid {
+        gap: 24px;
+    }
+}

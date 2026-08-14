@@ -15,7 +15,7 @@ Deno.serve(async (req) => {
 
     const htmlContent = `
         <div style="font-family: Arial, sans-serif; background-color: #000; color: #fff; padding: 40px; text-align: center;">
-            <h1 style="color: #d4af37; margin-bottom: 20px;">LuxFit AI</h1>
+            <h1 style="color: #d4af37; margin-bottom: 20px;">AURION AI</h1>
             <p style="font-size: 16px;">Hello ${name || 'there'},</p>
             <p style="font-size: 16px;">Here is your secure authentication code:</p>
             <div style="background-color: #1a1a1a; padding: 20px; border: 1px solid #d4af37; border-radius: 8px; font-size: 24px; font-weight: bold; letter-spacing: 4px; margin: 30px auto; width: 200px;">
@@ -32,9 +32,9 @@ Deno.serve(async (req) => {
         'Authorization': `Bearer ${resendKey}`
       },
       body: JSON.stringify({
-        from: 'LuxFit AI <auth@luxfit.ai>',
+        from: 'AURION AI <auth@luxfit.ai>',
         to: [email],
-        subject: 'Your Login Code | LuxFit AI',
+        subject: 'Your Login Code | AURION AI',
         html: htmlContent
       })
     })

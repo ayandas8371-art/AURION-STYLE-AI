@@ -118,7 +118,7 @@ export const StyleWizard = () => {
 
                         <div className={styles.brand}>
                             <Sparkles size={20} />
-                            <span>LuxFit AI</span>
+                            <span>AURION AI</span>
                         </div>
 
                         <div className={styles.stepIndicatorInfo}>

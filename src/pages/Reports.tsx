@@ -5,9 +5,11 @@ import { Button } from '../components/Button';
 import { SectionHeader } from '../components/SectionHeader';
 import { Download, Share2, Sparkles, X, Check } from 'lucide-react';
 import stylistConsult from '../assets/stylist-consult.jpg';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Reports.css';
 
 export const Reports: React.FC = () => {
+    useDocumentTitle('Style Reports');
     // Mock Report Data
     const report = {
         identity: "Modern Minimalist with Regal Undertones",
@@ -22,7 +24,7 @@ export const Reports: React.FC = () => {
     };
 
     return (
-        <Layout>
+        <Layout wide>
             <div className="reports-page">
                 {/* Report Cover */}
                 <div className="report-hero">

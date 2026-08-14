@@ -68,7 +68,7 @@ export const TryOn: React.FC = () => {
                             className="img-layer ai-layer"
                         >
                             <img src={aiImage} alt="Try On" />
-                            <span className="chk-label right">Aurion AI</span>
+                            <span className="chk-label right">AURION AI</span>
                         </div>
 
                         {/* Slider Control */}

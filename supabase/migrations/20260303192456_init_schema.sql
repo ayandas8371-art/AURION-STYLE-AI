@@ -1,4 +1,4 @@
--- Supabase Schema for StyleCompass AI / LuxFit AI
+-- Supabase Schema for StyleCompass AI / AURION AI
 
 -- Enable UUID extension
 create extension if not exists "uuid-ossp";

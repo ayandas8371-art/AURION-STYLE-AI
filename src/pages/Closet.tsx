@@ -5,9 +5,11 @@ import { MOCK_FEED } from '../data/mockData';
 import type { Outfit } from '../data/mockData';
 import { Trash2 } from 'lucide-react';
 import storeInterior from '../assets/store-interior.jpg';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Closet.css';
 
 export const Closet: React.FC = () => {
+    useDocumentTitle('Your Closet');
     // Flatten mock data for the closet view
     const allOutfits = MOCK_FEED
         .filter(s => s.type === 'outfits')
@@ -17,7 +19,7 @@ export const Closet: React.FC = () => {
     const filters = ['All', 'Wedding', 'Office', 'Casual', 'Party'];
 
     return (
-        <Layout>
+        <Layout wide>
             <div className="closet-page">
                 <div
                     className="closet-hero"
@@ -35,7 +37,7 @@ export const Closet: React.FC = () => {
                 >
                     <div>
                         <h1 className="text-3xl font-serif text-white">Your Virtual Closet</h1>
-                        <p className="text-gray-300 text-sm">Curated by Aurion AI</p>
+                        <p className="text-gray-300 text-sm">Curated by AURION AI</p>
                     </div>
                 </div>
 

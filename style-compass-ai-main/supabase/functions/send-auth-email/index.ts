@@ -131,7 +131,7 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
   
   if (type === "signup") {
     return {
-      subject: "Welcome to LuxFit AI - Verify Your Email",
+      subject: "Welcome to AURION AI - Verify Your Email",
       html: `
         <!DOCTYPE html>
         <html>
@@ -151,11 +151,11 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                         <span style="font-size: 24px;">✨</span>
                       </div>
                       <h1 style="margin: 0; font-size: 28px; font-weight: 600; color: #ffffff;">
-                        Welcome to <span style="background: linear-gradient(135deg, #d4af37, #f4e4bc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LuxFit</span> AI
+                        Welcome to <span style="background: linear-gradient(135deg, #d4af37, #f4e4bc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AURION</span> AI
                       </h1>
                     </td>
                   </tr>
-                  
+
                   <!-- Content -->
                   <tr>
                     <td style="padding: 20px 40px;">
@@ -163,7 +163,7 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                         Hello ${safeName},
                       </p>
                       <p style="margin: 0 0 30px; color: #a0a0a0; font-size: 16px; line-height: 1.6;">
-                        Thank you for joining LuxFit AI! Use the verification code below to complete your registration:
+                        Thank you for joining AURION AI! Use the verification code below to complete your registration:
                       </p>
                       
                       <!-- OTP Code -->
@@ -173,16 +173,16 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                       </div>
                       
                       <p style="margin: 0; color: #666; font-size: 14px; line-height: 1.6;">
-                        This code will expire in 10 minutes. If you didn't create an account with LuxFit AI, please ignore this email.
+                        This code will expire in 10 minutes. If you didn't create an account with AURION AI, please ignore this email.
                       </p>
                     </td>
                   </tr>
-                  
+
                   <!-- Footer -->
                   <tr>
                     <td style="padding: 30px 40px; border-top: 1px solid #2a2a2a;">
                       <p style="margin: 0; color: #555; font-size: 12px; text-align: center;">
-                        © 2024 LuxFit AI. Your personal AI style assistant.
+                        © 2024 AURION AI. Your personal AI style assistant.
                       </p>
                     </td>
                   </tr>
@@ -197,7 +197,7 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
   }
   
   return {
-    subject: "Your LuxFit AI Login Code",
+    subject: "Your AURION AI Login Code",
     html: `
       <!DOCTYPE html>
       <html>
@@ -217,11 +217,11 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                       <span style="font-size: 24px;">🔐</span>
                     </div>
                     <h1 style="margin: 0; font-size: 28px; font-weight: 600; color: #ffffff;">
-                      Login to <span style="background: linear-gradient(135deg, #d4af37, #f4e4bc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">LuxFit</span> AI
+                      Login to <span style="background: linear-gradient(135deg, #d4af37, #f4e4bc); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">AURION</span> AI
                     </h1>
                   </td>
                 </tr>
-                
+
                 <!-- Content -->
                 <tr>
                   <td style="padding: 20px 40px;">
@@ -229,7 +229,7 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                       Hello ${safeName},
                     </p>
                     <p style="margin: 0 0 30px; color: #a0a0a0; font-size: 16px; line-height: 1.6;">
-                      Use the code below to log in to your LuxFit AI account:
+                      Use the code below to log in to your AURION AI account:
                     </p>
                     
                     <!-- OTP Code -->
@@ -248,7 +248,7 @@ const getEmailTemplate = (otp: string, type: string, fullName: string) => {
                 <tr>
                   <td style="padding: 30px 40px; border-top: 1px solid #2a2a2a;">
                     <p style="margin: 0; color: #555; font-size: 12px; text-align: center;">
-                      © 2024 LuxFit AI. Your personal AI style assistant.
+                      © 2024 AURION AI. Your personal AI style assistant.
                     </p>
                   </td>
                 </tr>
@@ -287,7 +287,7 @@ const handler = async (req: Request): Promise<Response> => {
         "Authorization": `Bearer ${RESEND_API_KEY}`,
       },
       body: JSON.stringify({
-        from: "LuxFit AI <onboarding@resend.dev>",
+        from: "AURION AI <onboarding@resend.dev>",
         to: [email],
         subject,
         html,

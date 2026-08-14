@@ -30,7 +30,7 @@ const StyleReportCard = ({ report, userName = "Style Enthusiast" }: StyleReportC
       <!DOCTYPE html>
       <html>
         <head>
-          <title>LuxFit AI - Your Personal Style Report</title>
+          <title>AURION AI - Your Personal Style Report</title>
           <style>
             * { margin: 0; padding: 0; box-sizing: border-box; }
             body { font-family: 'Georgia', serif; background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); color: #fff; padding: 40px; min-height: 100vh; }
@@ -60,7 +60,7 @@ const StyleReportCard = ({ report, userName = "Style Enthusiast" }: StyleReportC
         </head>
         <body>
           <div class="header">
-            <h1>LuxFit AI</h1>
+            <h1>AURION AI</h1>
             <p>Your Personal Style Report &bull; Generated ${new Date().toLocaleDateString()}</p>
           </div>
           
@@ -116,7 +116,7 @@ const StyleReportCard = ({ report, userName = "Style Enthusiast" }: StyleReportC
         <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-2">
           Your Personal <span className="text-gradient-gold">Style DNA</span>
         </h2>
-        <p className="text-muted-foreground">Curated exclusively for you by LuxFit AI</p>
+        <p className="text-muted-foreground">Curated exclusively for you by AURION AI</p>
         
         <div className="flex justify-center gap-3 mt-6">
           <Button variant="luxury" onClick={handleDownload} className="gap-2">
@@ -623,7 +623,7 @@ const StyleReportCard = ({ report, userName = "Style Enthusiast" }: StyleReportC
           <p className="font-serif text-lg text-foreground leading-relaxed italic">
             "{report.finalStylistNote}"
           </p>
-          <p className="text-sm text-primary mt-4 font-medium">— Your LuxFit AI Stylist</p>
+          <p className="text-sm text-primary mt-4 font-medium">— Your AURION AI Stylist</p>
         </div>
       )}
     </div>

@@ -12,16 +12,18 @@ import whiteSuit from '../assets/white-suit.jpg';
 import resortElegance from '../assets/resort-elegance.jpg';
 import storeInterior from '../assets/store-interior.jpg';
 import { Sparkles, ShoppingBag, Palette, Zap, ArrowRight } from 'lucide-react';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Home.css';
 
 export const Home: React.FC = () => {
+    useDocumentTitle('Discover Your Perfect Style');
     const navigate = useNavigate();
     const handleUploadClick = () => {
         navigate('/style-wizard');
     };
 
     return (
-        <Layout>
+        <Layout wide>
             <div className="home-container">
                 {/* Hero Section - Split Layout */}
                 <section className="hero-section">
@@ -62,9 +64,9 @@ export const Home: React.FC = () => {
                     </div>
                 </section>
 
-                {/* Feature Grid - How LuxFit Works */}
+                {/* Feature Grid - How AURION AI Works */}
                 <section className="section-container">
-                    <h2 className="section-title text-center mb-8"><span style={{ color: '#FFFFFF' }}>How</span> <span className="text-gold">Aurion AI</span> <span style={{ color: '#FFFFFF' }}>Works</span></h2>
+                    <h2 className="section-title text-center mb-8"><span style={{ color: '#FFFFFF' }}>How</span> <span className="text-gold">AURION AI</span> <span style={{ color: '#FFFFFF' }}>Works</span></h2>
                     <div className="feature-grid">
                         <Card variant="glass" padding="none" className="feature-card">
                             <div className="feature-img-wrapper">

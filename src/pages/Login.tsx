@@ -7,9 +7,11 @@ import { Card } from '../components/Card';
 import { Mail, Phone, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { isSupabaseConfigured } from '../lib/supabase';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Login.css';
 
 export const Login: React.FC = () => {
+    useDocumentTitle('Sign In');
     const navigate = useNavigate();
     const { signIn, signInWithGoogle } = useAuth();
     const [authMethod, setAuthMethod] = useState<'email' | 'phone'>('email');

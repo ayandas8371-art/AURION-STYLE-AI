@@ -123,7 +123,7 @@ export const StyleQuiz = () => {
                         </button>
                         <div className={styles.brand}>
                             <Sparkles size={20} />
-                            <span>LuxFit AI Quiz</span>
+                            <span>AURION AI Quiz</span>
                         </div>
                         <div className={styles.stepIndicatorInfo}>
                             Step {currentStep} of 4

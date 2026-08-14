@@ -70,3 +70,99 @@
     border-radius: 2px;
     box-shadow: 0 4px 10px var(--color-gold);
 }
+
+/* ==========================================================================
+   Desktop composition (opt-in via Layout `wide` prop)
+   Mobile rules above are untouched; everything below only activates at
+   desktop widths and only for pages that opted into `wide`.
+   ========================================================================== */
+
+.desktop-nav {
+    display: none;
+}
+
+@media (min-width: 1024px) {
+
+    .app-container--wide {
+        max-width: 1920px;
+        box-shadow: none;
+    }
+
+    .app-container--wide .app-content {
+        padding-bottom: 0;
+        padding-top: 88px;
+    }
+
+    .app-container--wide .bottom-nav {
+        display: none;
+    }
+
+    .desktop-nav {
+        display: flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 88px;
+        z-index: 200;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 56px;
+        background: rgba(5, 5, 5, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    .desktop-nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: var(--font-heading);
+        font-size: 20px;
+        letter-spacing: 0.08em;
+        color: var(--color-text-primary);
+    }
+
+    .desktop-nav-brand .brand-accent {
+        color: var(--color-gold);
+    }
+
+    .desktop-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 44px;
+    }
+
+    .desktop-nav-link {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-text-secondary);
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        padding: 8px 2px;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .desktop-nav-link:hover {
+        color: var(--color-gold);
+    }
+
+    .desktop-nav-link.active {
+        color: var(--color-gold);
+    }
+
+    .desktop-nav-link.active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -10px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        box-shadow: 0 2px 8px var(--color-gold);
+    }
+}

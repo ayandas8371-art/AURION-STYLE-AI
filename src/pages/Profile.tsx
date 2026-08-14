@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '../components/Layout';
 import { Crown, LogOut, ChevronRight, User, Bell, HelpCircle, Shield } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Profile.css';
 
 export const Profile: React.FC = () => {
+    useDocumentTitle('Profile');
     const navigate = useNavigate();
     const { user, signOut } = useAuth();
     const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'Aurion Guest';
@@ -34,7 +36,7 @@ export const Profile: React.FC = () => {
     ];
 
     return (
-        <Layout>
+        <Layout wide>
             <div className="profile-page">
                 {/* Header */}
                 <div className="profile-header">

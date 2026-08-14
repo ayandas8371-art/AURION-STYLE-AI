@@ -9,6 +9,7 @@ import whiteSuit from '../assets/white-suit.jpg';
 import storeInterior from '../assets/store-interior.jpg';
 import shoppingTablet from '../assets/shopping-tablet.jpg';
 import exploreSparkleBg from '../assets/explore-sparkle-bg.jpg';
+import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Explore.css';
 
 // Mock Data
@@ -74,6 +75,7 @@ const EXPLORE_ITEMS = [
 ];
 
 export const Explore: React.FC = () => {
+    useDocumentTitle('Explore');
     const [activeCategory, setActiveCategory] = useState('All');
 
     const filteredItems = activeCategory === 'All'
@@ -81,7 +83,7 @@ export const Explore: React.FC = () => {
         : EXPLORE_ITEMS.filter(item => item.category === activeCategory);
 
     return (
-        <Layout>
+        <Layout wide>
             <div className="explore-page">
                 {/* Hero Section */}
                 {/* Hero Section */}

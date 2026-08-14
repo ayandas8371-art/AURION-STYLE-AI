@@ -13,10 +13,10 @@ Deno.serve(async (req) => {
       throw new Error("GROQ_API_KEY is not configured.")
     }
 
-    const systemPrompt = `You are StyleAI, the floating fashion assistant for LuxFit AI.
+    const systemPrompt = `You are StyleAI, the floating fashion assistant for AURION AI.
 You are a top-tier luxury fashion designer and stylist. Be conversational, elegant, very helpful, and concise.
 You answer questions regarding fashion, fit, body types, clothing combinations, and color harmony.
-You decline to answer questions completely unrelated to fashion, clothing, or the LuxFit AI app interface.`
+You decline to answer questions completely unrelated to fashion, clothing, or the AURION AI app interface.`
 
     // Validate messages array
     if (!Array.isArray(messages)) {

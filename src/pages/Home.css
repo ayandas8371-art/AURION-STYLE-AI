@@ -605,3 +605,98 @@
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(0, 0, 0, 0.95));
     border: 1px solid rgba(212, 175, 55, 0.2);
 }
+
+/* ==========================================================================
+   Desktop composition (Layout `wide`). Mobile rules above are untouched;
+   these only apply at desktop widths.
+   ========================================================================== */
+@media (min-width: 1024px) {
+    .home-container::before {
+        max-width: 1920px;
+        background-size: cover;
+    }
+
+    .hero-grid {
+        max-width: 1200px;
+        padding: 72px 48px 96px;
+        min-height: auto;
+    }
+
+    .hero-title {
+        font-size: 72px;
+    }
+
+    .hero-info-card {
+        max-width: 380px;
+        flex-direction: row;
+        align-items: center;
+        text-align: left;
+        padding: 20px;
+    }
+
+    .hero-info-card .info-card-img {
+        width: 120px;
+        height: 120px;
+        aspect-ratio: 1/1;
+        flex-shrink: 0;
+    }
+
+    .hero-info-card .hero-description {
+        margin-top: 0;
+        text-align: left;
+        font-size: 16px;
+    }
+
+    .hero-actions {
+        flex-direction: row;
+        max-width: none;
+        justify-content: center;
+    }
+
+    .hero-actions .btn {
+        min-width: 220px;
+    }
+
+    .section-container {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 64px 48px 0;
+    }
+
+    .section-title {
+        font-size: 36px;
+    }
+
+    .feature-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+    }
+
+    .inspiration-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .inspire-item {
+        height: 260px;
+    }
+
+    .inspire-item.tall {
+        height: 540px;
+    }
+
+    .cta-section {
+        max-width: 1320px;
+        margin: 0 auto;
+        padding: 80px 48px;
+    }
+
+    .cta-card {
+        padding: 64px 48px;
+    }
+}

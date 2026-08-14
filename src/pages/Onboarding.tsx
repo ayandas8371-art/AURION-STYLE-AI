@@ -113,7 +113,7 @@ const StepPhoto = ({ onNext, onUpload }: { onNext: () => void, onUpload: (f: Fil
         <div className="step-container fade-in">
             <div className="step-header">
                 <h2>Your Style Journey</h2>
-                <p>Aurion AI uses your photo to personalize your experience</p>
+                <p>AURION AI uses your photo to personalize your experience</p>
             </div>
 
             <div
