@@ -112,7 +112,7 @@ export const Home: React.FC = () => {
                 </section>
 
                 {/* Trending Styles */}
-                <section className="section-container">
+                <section className="section-container trending-section">
                     <div className="section-header-row mb-2">
                         <h2 className="section-title mb-0" style={{ color: '#FFFFFF' }}>Trending Styles Today</h2>
                         <div className="badge-pill">Updated Daily</div>
@@ -186,7 +186,7 @@ export const Home: React.FC = () => {
                 {/* CTA Footer */}
                 <section className="cta-section">
                     <Card variant="glass" className="cta-card text-center">
-                        <h2 className="text-2xl font-serif mb-4">Ready to Transform Your Style?</h2>
+                        <h2 className="text-2xl font-serif mb-4 cta-title">Ready to Transform Your Style?</h2>
                         <p className="text-gray-400 mb-6">Join thousands of fashion-forward individuals who've discovered their perfect look.</p>
                         <Button variant="primary" fullWidth className="max-w-xs mx-auto">
                             Get Your Personalized Outfits

@@ -618,90 +618,207 @@
         max-width: 1920px;
     }
 
+    /* ---------- Hero: genuine two-zone editorial composition ----------
+       .hero-grid previously stayed a centered single column at every
+       width (the 900px query only added padding), which is why the
+       desktop hero read as a mobile hero floating in a big canvas.
+       .hero-content becomes the grid formatting context so its existing
+       children (badge/title/actions/social-proof) can be placed into a
+       left "decision" column while .hero-info-card - already image +
+       caption together - becomes the right-column visual anchor. No DOM
+       restructuring: every element keeps its current place in the
+       markup, only its grid placement changes. */
     .hero-grid {
-        max-width: 1200px;
-        padding: 72px 48px 96px;
+        max-width: 1280px;
+        padding: 96px 48px 112px;
         min-height: auto;
+        align-items: center;
+    }
+
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        grid-template-areas:
+            "badge  visual"
+            "title  visual"
+            "actions visual"
+            "social visual";
+        column-gap: 80px;
+        align-items: start;
+        text-align: left;
+        width: 100%;
+    }
+
+    .hero-badge {
+        grid-area: badge;
+        justify-self: start;
+        margin-left: 0;
+        margin-right: 0;
     }
 
     .hero-title {
+        grid-area: title;
+        text-align: left;
+        justify-self: start;
         font-size: 72px;
     }
 
-    .hero-info-card {
-        max-width: 380px;
-        flex-direction: row;
-        align-items: center;
-        text-align: left;
-        padding: 20px;
-    }
-
-    .hero-info-card .info-card-img {
-        width: 120px;
-        height: 120px;
-        aspect-ratio: 1/1;
-        flex-shrink: 0;
-    }
-
-    .hero-info-card .hero-description {
-        margin-top: 0;
-        text-align: left;
-        font-size: 16px;
-    }
-
     .hero-actions {
+        grid-area: actions;
+        justify-self: start;
         flex-direction: row;
         max-width: none;
-        justify-content: center;
     }
 
     .hero-actions .btn {
         min-width: 220px;
     }
 
+    .hero-social-proof {
+        grid-area: social;
+        justify-self: start;
+    }
+
+    /* The visual anchor: same image + caption pairing as mobile, just
+       given real desktop scale and a portrait orientation so it reads
+       as a considered fashion visual rather than a small info strip. */
+    .hero-info-card {
+        grid-area: visual;
+        align-self: center;
+        max-width: 460px;
+        width: 100%;
+        flex-direction: column;
+        text-align: center;
+        padding: 28px;
+        margin-bottom: 0;
+        justify-self: end;
+    }
+
+    .hero-info-card .info-card-img {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4/5;
+    }
+
+    .hero-info-card .hero-description {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 16px;
+    }
+
+    /* ---------- Shared section container ---------- */
     .section-container {
         max-width: 1320px;
         margin: 0 auto;
-        padding: 64px 48px 0;
+        padding: 88px 48px 0;
     }
 
     .section-title {
         font-size: 36px;
+        margin-bottom: 16px;
     }
 
+    .section-subtitle {
+        font-size: 15px;
+    }
+
+    /* ---------- How AURION AI Works ---------- */
     .feature-grid {
         grid-template-columns: repeat(4, 1fr);
         gap: 24px;
     }
 
+    .feature-content {
+        padding: 28px 20px;
+    }
+
+    .feature-icon {
+        width: 44px;
+        height: 44px;
+        margin-top: -46px;
+    }
+
+    .feature-card h3 {
+        font-size: 16px;
+    }
+
+    .feature-card p {
+        font-size: 12.5px;
+    }
+
+    /* ---------- Trending Styles Today ----------
+       Forcing 2 real products into a 4-column desktop grid (matching
+       "How AURION AI Works") left 2 empty ghost columns - exactly the
+       "huge unused horizontal space" problem. A curated duo doesn't need
+       the full 1320px section width; give it its own narrower, centered
+       container so the two cards read as a deliberate selection instead
+       of either starved cards in a wide row or stretched-huge cards. */
+    .trending-section {
+        max-width: 860px;
+    }
+
     .product-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+    }
+
+    .product-image-wrapper {
+        margin-bottom: 16px;
+    }
+
+    .product-details h4 {
+        font-size: 15px;
+    }
+
+    .brand-name {
+        font-size: 11px;
+    }
+
+    .price-row {
+        font-size: 14px;
+    }
+
+    /* ---------- Curated Fashion Inspiration ----------
+       Keep the same 1-big + 2-stacked editorial hierarchy mobile already
+       uses (an equal 3-column grid at desktop broke that pairing: with
+       only 3 items and one spanning 2 rows, the other two landed side by
+       side in row 1 instead of stacked). Just give the big visual more
+       relative weight and everything more room. */
+    .inspiration-grid {
+        grid-template-columns: 1.3fr 1fr;
         gap: 24px;
     }
 
-    .inspiration-grid {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 20px;
-    }
-
     .inspire-item {
-        height: 260px;
+        height: 300px;
     }
 
     .inspire-item.tall {
-        height: 540px;
+        height: 624px;
     }
 
+    .inspire-overlay span {
+        font-size: 20px;
+    }
+
+    /* ---------- Final CTA ---------- */
     .cta-section {
         max-width: 1320px;
         margin: 0 auto;
-        padding: 80px 48px;
+        padding: 96px 48px 120px;
     }
 
     .cta-card {
-        max-width: 760px;
+        max-width: 780px;
         margin: 0 auto;
-        padding: 64px 56px;
+        padding: 72px 64px;
+        background:
+            radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08), transparent 60%),
+            linear-gradient(135deg, rgba(20, 20, 20, 0.95), rgba(0, 0, 0, 0.95));
+    }
+
+    .cta-title {
+        font-size: 34px;
     }
 
     .cta-card .max-w-xs {
