@@ -142,6 +142,18 @@
     line-height: 1.7;
 }
 
+/* ============ Color Analysis card surface ============
+   Same premium glass family as .identity-card - dark translucent
+   surface, gold-tinted hairline border (inherited from .card-glass),
+   restrained radial gold highlight - just a lighter touch since this
+   is a secondary card, not the report's hero. */
+.color-analysis-card {
+    padding: 28px 24px;
+    background:
+        radial-gradient(circle at 85% 0%, rgba(212, 175, 55, 0.1), transparent 55%),
+        var(--glass-bg);
+}
+
 /* ============ Shared section bits ============ */
 .subsection-title {
     font-size: 11px;
@@ -224,6 +236,16 @@
         var(--glass-bg);
 }
 
+/* Same glass surface/border/shadow family as dossier-col-good (via
+   .card-glass) so the pair reads as one deliberate design - just a
+   neutral highlight instead of gold, so "avoid" stays visually
+   subordinate without resorting to red/warning colors. */
+.dossier-col-bad {
+    background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.04), transparent 60%),
+        var(--glass-bg);
+}
+
 .col-header {
     display: flex;
     align-items: center;
@@ -278,19 +300,25 @@
 }
 
 .fabric-pill {
-    padding: 10px 22px;
-    background: var(--color-charcoal-light);
+    padding: 12px 26px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--glass-border);
     border-radius: var(--radius-full);
     color: var(--color-text-primary);
     white-space: nowrap;
-    font-size: 13px;
-    transition: border-color var(--transition-fast), color var(--transition-fast);
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    transition: border-color var(--transition-fast), color var(--transition-fast), background var(--transition-fast);
 }
 
 .fabric-pill:hover {
     border-color: var(--color-gold);
     color: var(--color-gold);
+    background: rgba(212, 175, 55, 0.08);
 }
 
 /* ============ CTAs ============ */

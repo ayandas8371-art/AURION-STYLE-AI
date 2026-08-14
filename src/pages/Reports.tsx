@@ -60,7 +60,7 @@ export const Reports: React.FC = () => {
                     {/* Color Analysis */}
                     <div className="report-section">
                         <SectionHeader title="Color Analysis" icon="Sun" />
-                        <Card variant="solid" className="p-4">
+                        <Card variant="glass" className="color-analysis-card">
                             <h4 className="subsection-title">Power Colors</h4>
                             <div className="swatch-row mb-4">
                                 {report.colors.best.map(c => (
@@ -99,7 +99,7 @@ export const Reports: React.FC = () => {
                                     ))}
                                 </ul>
                             </Card>
-                            <Card variant="solid" className="dossier-col">
+                            <Card variant="glass" className="dossier-col dossier-col-bad">
                                 <h4 className="col-header bad">
                                     <X size={16} aria-hidden="true" /> Avoid
                                 </h4>
