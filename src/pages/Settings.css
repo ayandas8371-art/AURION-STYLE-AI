@@ -1,0 +1,259 @@
+/* Shared layout for Account Information / Notifications / Privacy &
+   Security / Help Center. Reuses the app's existing card/button/input
+   design tokens rather than inventing a new visual system. */
+
+.settings-page {
+    min-height: 100vh;
+    background-color: var(--color-black);
+    padding-bottom: 100px;
+    color: var(--color-text-primary);
+}
+
+.settings-content {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0 24px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.settings-card {
+    padding: 24px;
+}
+
+.settings-card-title {
+    font-family: var(--font-heading);
+    font-size: 17px;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+}
+
+.settings-card-desc {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.settings-field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.settings-form-error {
+    color: #f87171;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.settings-form-success {
+    color: var(--color-gold);
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.settings-save-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+/* ---------- Toggle rows (Notifications) ---------- */
+.settings-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.settings-toggle-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.settings-toggle-row:first-child {
+    padding-top: 0;
+}
+
+.settings-toggle-label {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    margin-bottom: 2px;
+}
+
+.settings-toggle-desc {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+}
+
+.settings-toggle {
+    position: relative;
+    width: 44px;
+    height: 26px;
+    flex-shrink: 0;
+    border-radius: 999px;
+    background: var(--color-charcoal-light);
+    border: 1px solid var(--color-charcoal);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.settings-toggle:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.settings-toggle::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-text-secondary);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.settings-toggle.on {
+    background: rgba(212, 175, 55, 0.25);
+    border-color: var(--color-gold);
+}
+
+.settings-toggle.on::after {
+    transform: translateX(18px);
+    background: var(--color-gold);
+}
+
+/* ---------- Privacy & Security ---------- */
+.settings-info-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.settings-info-list li {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+}
+
+.settings-info-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-gold);
+}
+
+.settings-danger-card {
+    border-color: rgba(248, 113, 113, 0.25) !important;
+}
+
+.settings-danger-card .settings-card-title {
+    color: #f87171;
+}
+
+/* ---------- Help Center ---------- */
+.help-search-wrapper {
+    position: relative;
+    margin-bottom: 8px;
+}
+
+.help-search-input {
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    background: var(--color-charcoal-light);
+    border: 1px solid var(--color-charcoal);
+    border-radius: var(--radius-full);
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-family: var(--font-body);
+    transition: border-color 0.2s ease;
+}
+
+.help-search-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.help-search-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--color-text-muted);
+    pointer-events: none;
+}
+
+.help-faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.help-faq-item:last-child {
+    border-bottom: none;
+}
+
+.help-faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 4px;
+    text-align: left;
+    color: var(--color-text-primary);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.help-faq-question svg {
+    color: var(--color-gold);
+    flex-shrink: 0;
+    transition: transform 0.2s ease;
+}
+
+.help-faq-question[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.help-faq-answer {
+    padding: 0 4px 16px;
+    color: var(--color-text-secondary);
+    font-size: 13.5px;
+    line-height: 1.6;
+}
+
+.help-empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 13px;
+    padding: 32px 0;
+}
+
+@media (min-width: 1024px) {
+    .settings-content {
+        max-width: 640px;
+        padding: 0 48px 80px;
+        gap: 28px;
+    }
+
+    .settings-card {
+        padding: 36px 40px;
+    }
+
+    .settings-card-title {
+        font-size: 19px;
+    }
+}

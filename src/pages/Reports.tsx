@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Layout } from '../components/Layout';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { SectionHeader } from '../components/SectionHeader';
 import { Download, Share2, Sparkles, X, Check } from 'lucide-react';
+import { toast } from 'sonner';
 import stylistConsult from '../assets/stylist-consult.jpg';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import './Reports.css';
 
 export const Reports: React.FC = () => {
     useDocumentTitle('Style Reports');
+    const [isSharing, setIsSharing] = useState(false);
+
     // Mock Report Data
     const report = {
         identity: "Modern Minimalist with Regal Undertones",
@@ -21,6 +24,43 @@ export const Reports: React.FC = () => {
         fabrics: ["Silk", "Velvet", "Structured Wool"],
         dos: ["High-waisted silhouettes", "Monochromatic layers", "Statement gold jewelry"],
         donts: ["Boxy oversized tops", "Neon palettes", "Small chaotic prints"]
+    };
+
+    // Uses the browser's native print flow (choose "Save as PDF" in the
+    // print dialog) rather than a client-side PDF library - a real,
+    // dependency-free download path. @media print rules in Reports.css /
+    // Layout.css strip navigation and atmospheric backgrounds for a clean
+    // printed page.
+    const handleDownloadPdf = () => {
+        window.print();
+    };
+
+    const handleShareProfile = async () => {
+        if (isSharing) return;
+        setIsSharing(true);
+        const shareData = {
+            title: 'My AURION AI Style Report',
+            text: `${report.identity} — see my personalized AI style dossier on AURION AI.`,
+            url: window.location.href,
+        };
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else if (navigator.clipboard) {
+                await navigator.clipboard.writeText(shareData.url);
+                toast.success('Report link copied to clipboard');
+            } else {
+                toast.error('Sharing is not supported on this browser');
+            }
+        } catch (err) {
+            // AbortError fires when the user just closes the native share
+            // sheet without picking anything - not a real failure.
+            if (err instanceof Error && err.name !== 'AbortError') {
+                toast.error('Could not share your report. Please try again.');
+            }
+        } finally {
+            setIsSharing(false);
+        }
     };
 
     return (
@@ -127,10 +167,17 @@ export const Reports: React.FC = () => {
                     </div>
 
                     <div className="report-actions">
-                        <Button variant="primary" fullWidth leftIcon={<Download size={18} />}>
+                        <Button variant="primary" fullWidth leftIcon={<Download size={18} />} onClick={handleDownloadPdf}>
                             Download PDF Report
                         </Button>
-                        <Button variant="outline" fullWidth className="mt-4" leftIcon={<Share2 size={18} />}>
+                        <Button
+                            variant="outline"
+                            fullWidth
+                            className="mt-4"
+                            leftIcon={<Share2 size={18} />}
+                            onClick={handleShareProfile}
+                            isLoading={isSharing}
+                        >
                             Share Profile
                         </Button>
                     </div>

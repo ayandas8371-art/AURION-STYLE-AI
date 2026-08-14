@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout } from '../components/Layout';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Heart } from 'lucide-react';
 import heroDinner from '../assets/hero-dinner.jpg';
 import boutiqueWhite from '../assets/boutique-white.jpg';
 import shoeEditorial from '../assets/shoe-editorial.jpg';
@@ -10,6 +10,7 @@ import storeInterior from '../assets/store-interior.jpg';
 import shoppingTablet from '../assets/shopping-tablet.jpg';
 import exploreSparkleBg from '../assets/explore-sparkle-bg.jpg';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useFavorite } from '../hooks/useFavorite';
 import './Explore.css';
 
 // Mock Data
@@ -74,6 +75,67 @@ const EXPLORE_ITEMS = [
     }
 ];
 
+const parsePrice = (price: string): number => {
+    const digits = price.replace(/[^\d]/g, '');
+    return digits ? parseInt(digits, 10) : 0;
+};
+
+const buildSearchUrl = (brand: string, title: string) =>
+    `https://www.google.com/search?tbm=shop&q=${encodeURIComponent(`${brand} ${title}`)}`;
+
+interface ExploreItem {
+    id: number;
+    image: string;
+    title: string;
+    brand: string;
+    price: string;
+    category: string;
+}
+
+const ExploreCard: React.FC<{ item: ExploreItem }> = ({ item }) => {
+    const favorite = useFavorite({
+        id: `explore-${item.id}`,
+        name: item.title,
+        brand: item.brand,
+        category: item.category,
+        price: parsePrice(item.price),
+    });
+
+    return (
+        <div className="explore-card">
+            <div className="explore-img-container">
+                <img src={item.image} alt={item.title} />
+                <div className="explore-overlay">
+                    <div className="explore-actions">
+                        <button
+                            className="explore-action-btn"
+                            onClick={favorite.toggle}
+                            disabled={favorite.loading}
+                            aria-pressed={favorite.isFavorited}
+                        >
+                            <Heart size={13} fill={favorite.isFavorited ? 'currentColor' : 'none'} style={{ marginRight: 6, verticalAlign: -2 }} />
+                            {favorite.isFavorited ? 'Saved' : 'Save'}
+                        </button>
+                        <a
+                            className="explore-action-btn secondary"
+                            href={buildSearchUrl(item.brand, item.title)}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            View
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div className="explore-details">
+                <span className="explore-brand">{item.brand}</span>
+                <h3 className="explore-title">{item.title}</h3>
+                <p className="explore-price">{item.price}</p>
+            </div>
+        </div>
+    );
+};
+
 export const Explore: React.FC = () => {
     useDocumentTitle('Explore');
     const [activeCategory, setActiveCategory] = useState('All');
@@ -114,22 +176,7 @@ export const Explore: React.FC = () => {
                 {/* Masonry Grid */}
                 <div className="explore-grid">
                     {filteredItems.map(item => (
-                        <div key={item.id} className="explore-card">
-                            <div className="explore-img-container">
-                                <img src={item.image} alt={item.title} />
-                                <div className="explore-overlay">
-                                    <div className="explore-actions">
-                                        <button className="explore-action-btn">Shop Now</button>
-                                        <button className="explore-action-btn secondary">View</button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="explore-details">
-                                <span className="explore-brand">{item.brand}</span>
-                                <h3 className="explore-title">{item.title}</h3>
-                                <p className="explore-price">{item.price}</p>
-                            </div>
-                        </div>
+                        <ExploreCard key={item.id} item={item} />
                     ))}
                 </div>
             </div>

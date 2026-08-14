@@ -131,6 +131,14 @@
     margin-bottom: 24px;
 }
 
+.closet-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    padding: 48px 24px;
+}
+
 /* ==========================================================================
    Desktop composition (Layout `wide`). Mobile rules above are untouched.
    ========================================================================== */
@@ -224,6 +232,10 @@
 
     .closet-item-duplicate {
         display: none;
+    }
+
+    .closet-empty {
+        width: 100%;
     }
 
     /* Compound selector (.closet-grid .closet-item) so this reliably beats

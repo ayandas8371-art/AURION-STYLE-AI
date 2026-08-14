@@ -15,6 +15,10 @@ import { Profile } from './pages/Profile';
 import { TryOn } from './pages/TryOn';
 import { StyleWizard } from './pages/StyleWizard';
 import { StyleQuiz } from './pages/StyleQuiz';
+import { AccountInformation } from './pages/AccountInformation';
+import { Notifications } from './pages/Notifications';
+import { PrivacySecurity } from './pages/PrivacySecurity';
+import { HelpCenter } from './pages/HelpCenter';
 
 const queryClient = new QueryClient();
 
@@ -39,6 +43,10 @@ function App() {
             <Route path="/reports" element={<ProtectedRoute><Reports /></ProtectedRoute>} />
             <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
             <Route path="/style-quiz" element={<ProtectedRoute><StyleQuiz /></ProtectedRoute>} />
+            <Route path="/profile/account" element={<ProtectedRoute><AccountInformation /></ProtectedRoute>} />
+            <Route path="/profile/notifications" element={<ProtectedRoute><Notifications /></ProtectedRoute>} />
+            <Route path="/profile/privacy-security" element={<ProtectedRoute><PrivacySecurity /></ProtectedRoute>} />
+            <Route path="/profile/help" element={<ProtectedRoute><HelpCenter /></ProtectedRoute>} />
 
             {/* Default Route */}
             <Route path="/" element={<Navigate to="/home" replace />} />

@@ -1,0 +1,48 @@
+.settings-page-header {
+    padding: 32px 24px 24px;
+    text-align: center;
+}
+
+.settings-back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    margin-bottom: 20px;
+    transition: color 0.2s ease;
+}
+
+.settings-back-btn:hover {
+    color: var(--color-gold);
+}
+
+.settings-page-title {
+    font-family: var(--font-heading);
+    font-size: 28px;
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+}
+
+.settings-page-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+}
+
+@media (min-width: 1024px) {
+    .settings-page-header {
+        padding: 64px 48px 40px;
+    }
+
+    .settings-back-btn {
+        margin-bottom: 28px;
+    }
+
+    .settings-page-title {
+        font-size: 38px;
+    }
+
+    .settings-page-subtitle {
+        font-size: 15px;
+    }
+}

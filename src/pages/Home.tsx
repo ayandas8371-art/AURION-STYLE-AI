@@ -11,9 +11,28 @@ import heroDinner from '../assets/hero-dinner.jpg';
 import whiteSuit from '../assets/white-suit.jpg';
 import resortElegance from '../assets/resort-elegance.jpg';
 import storeInterior from '../assets/store-interior.jpg';
-import { Sparkles, ShoppingBag, Palette, Zap, ArrowRight } from 'lucide-react';
+import { Sparkles, ShoppingBag, Palette, Zap, ArrowRight, Heart } from 'lucide-react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
+import { useFavorite } from '../hooks/useFavorite';
 import './Home.css';
+
+const TRENDING_BLAZER = {
+    id: 'home-trending-zara-oversized-blazer',
+    name: 'Oversized Blazer',
+    brand: 'Zara',
+    category: 'Apparel',
+    price: 5999,
+    discountedPrice: 3999,
+};
+
+const TRENDING_SNEAKERS = {
+    id: 'home-trending-nike-mesh-sneakers',
+    name: 'Mesh Sneakers',
+    brand: 'Nike',
+    category: 'Footwear',
+    price: 8999,
+    discountedPrice: 5999,
+};
 
 export const Home: React.FC = () => {
     useDocumentTitle('Discover Your Perfect Style');
@@ -21,6 +40,9 @@ export const Home: React.FC = () => {
     const handleUploadClick = () => {
         navigate('/style-wizard');
     };
+
+    const blazerFavorite = useFavorite(TRENDING_BLAZER);
+    const sneakersFavorite = useFavorite(TRENDING_SNEAKERS);
 
     return (
         <Layout wide>
@@ -125,7 +147,15 @@ export const Home: React.FC = () => {
                             <div className="product-image-wrapper">
                                 <img src={boutiqueWhite} alt="Oversized Blazer" />
                                 <span className="discount-badge">33% OFF</span>
-                                <button className="wishlist-btn"><span className="heart-icon">♡</span></button>
+                                <button
+                                    className={`wishlist-btn ${blazerFavorite.isFavorited ? 'active' : ''}`}
+                                    onClick={blazerFavorite.toggle}
+                                    disabled={blazerFavorite.loading}
+                                    aria-pressed={blazerFavorite.isFavorited}
+                                    aria-label={blazerFavorite.isFavorited ? 'Remove Oversized Blazer from closet' : 'Save Oversized Blazer to closet'}
+                                >
+                                    <Heart size={16} fill={blazerFavorite.isFavorited ? 'currentColor' : 'none'} />
+                                </button>
                             </div>
                             <div className="product-details">
                                 <span className="brand-name">Zara</span>
@@ -142,7 +172,15 @@ export const Home: React.FC = () => {
                             <div className="product-image-wrapper">
                                 <img src={shoeEditorial} alt="Nike Mesh Sneakers" />
                                 <span className="discount-badge">20% OFF</span>
-                                <button className="wishlist-btn"><span className="heart-icon">♡</span></button>
+                                <button
+                                    className={`wishlist-btn ${sneakersFavorite.isFavorited ? 'active' : ''}`}
+                                    onClick={sneakersFavorite.toggle}
+                                    disabled={sneakersFavorite.loading}
+                                    aria-pressed={sneakersFavorite.isFavorited}
+                                    aria-label={sneakersFavorite.isFavorited ? 'Remove Mesh Sneakers from closet' : 'Save Mesh Sneakers to closet'}
+                                >
+                                    <Heart size={16} fill={sneakersFavorite.isFavorited ? 'currentColor' : 'none'} />
+                                </button>
                             </div>
                             <div className="product-details">
                                 <span className="brand-name">Nike</span>

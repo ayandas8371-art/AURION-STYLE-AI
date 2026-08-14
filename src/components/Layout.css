@@ -166,3 +166,22 @@
         box-shadow: 0 2px 8px var(--color-gold);
     }
 }
+
+/* Printed output (e.g. Reports' "Download PDF Report" via window.print())
+   never needs the app's own navigation chrome. */
+@media print {
+
+    .bottom-nav,
+    .desktop-nav {
+        display: none !important;
+    }
+
+    .app-container {
+        max-width: 100%;
+        box-shadow: none;
+    }
+
+    .app-content {
+        padding-bottom: 0;
+    }
+}

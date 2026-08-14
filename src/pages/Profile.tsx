@@ -106,17 +106,17 @@ export const Profile: React.FC = () => {
                 <div className="profile-section">
                     <h3 className="section-title">Settings</h3>
                     <div className="settings-group">
-                        <button className="settings-item">
+                        <button className="settings-item" onClick={() => navigate('/profile/account')}>
                             <div className="settings-icon"><User size={20} /></div>
                             <span className="settings-label">Account Information</span>
                             <ChevronRight size={16} className="settings-arrow" />
                         </button>
-                        <button className="settings-item">
+                        <button className="settings-item" onClick={() => navigate('/profile/notifications')}>
                             <div className="settings-icon"><Bell size={20} /></div>
                             <span className="settings-label">Notifications</span>
                             <ChevronRight size={16} className="settings-arrow" />
                         </button>
-                        <button className="settings-item">
+                        <button className="settings-item" onClick={() => navigate('/profile/privacy-security')}>
                             <div className="settings-icon"><Shield size={20} /></div>
                             <span className="settings-label">Privacy & Security</span>
                             <ChevronRight size={16} className="settings-arrow" />
@@ -125,7 +125,7 @@ export const Profile: React.FC = () => {
 
                     <h3 className="section-title">Support</h3>
                     <div className="settings-group">
-                        <button className="settings-item">
+                        <button className="settings-item" onClick={() => navigate('/profile/help')}>
                             <div className="settings-icon"><HelpCircle size={20} /></div>
                             <span className="settings-label">Help Center</span>
                             <ChevronRight size={16} className="settings-arrow" />

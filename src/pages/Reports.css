@@ -515,3 +515,87 @@
         padding: 40px 12px 4px;
     }
 }
+
+/* ==========================================================================
+   Print (Download PDF Report -> window.print()). The app's dark theme
+   isn't appropriate for a printed page - swap to dark text on a plain
+   white background, drop decorative backgrounds/glows/buttons, and let
+   content flow/paginate naturally instead of the fixed atmospheric layer.
+   ========================================================================== */
+@media print {
+    .reports-page::before {
+        display: none !important;
+    }
+
+    .reports-page {
+        background: #fff !important;
+        color: #111 !important;
+        min-height: 0;
+    }
+
+    .report-hero-overlay {
+        display: none;
+    }
+
+    .report-hero {
+        border-color: #ccc;
+        box-shadow: none;
+        aspect-ratio: auto;
+        min-height: 0;
+        height: auto;
+        page-break-inside: avoid;
+    }
+
+    .report-hero-content {
+        position: static;
+        padding: 16px 0;
+    }
+
+    .report-title,
+    .identity-text {
+        color: #111 !important;
+        background: none !important;
+        -webkit-text-fill-color: #111 !important;
+    }
+
+    .report-eyebrow,
+    .good,
+    .identity-badge {
+        color: #8a6e1e !important;
+    }
+
+    .report-meta-row,
+    .identity-desc,
+    .subsection-title,
+    .swatch-hex,
+    .dossier-list li,
+    .fabric-pill,
+    .col-header.bad,
+    .dimmed li {
+        color: #333 !important;
+    }
+
+    .identity-card,
+    .color-analysis-card,
+    .dossier-col,
+    .fabric-pill {
+        background: none !important;
+        border: 1px solid #ddd !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+        page-break-inside: avoid;
+    }
+
+    .color-block:first-child {
+        border-right-color: #ddd;
+    }
+
+    .identity-badge {
+        background: none !important;
+        border: 1px solid #ddd;
+    }
+
+    .report-actions {
+        display: none !important;
+    }
+}
