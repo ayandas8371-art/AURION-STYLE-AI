@@ -349,35 +349,169 @@
    Desktop composition (Layout `wide`). Mobile rules above are untouched.
    ========================================================================== */
 @media (min-width: 1024px) {
+
+    /* Base page: background moved to .reports-page::before (below). The
+       page's own box grows to the full scrollable content height (hero +
+       identity + color analysis + styling guidance + fabrics + actions
+       easily exceeds 1800px), and background-attachment:fixed +
+       background-size:cover computed against that tall box - not the
+       viewport - is what made the backdrop feel oversized and louder than
+       the report content. Same fix already applied to Closet/Profile. */
     .reports-page {
-        background-image:
-            linear-gradient(180deg, rgba(2, 2, 2, 0.35) 0%, rgba(2, 2, 2, 0.1) 30%, rgba(2, 2, 2, 0.45) 100%),
-            url('../assets/reports_background_BG_desktop.png');
-        background-size: cover;
-        background-position: center top;
+        background-image: none;
+        background-color: var(--color-black);
+        position: relative;
     }
 
+    .reports-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 1920px;
+        height: 100vh;
+        background-image:
+            linear-gradient(180deg, rgba(2, 2, 2, 0.4) 0%, rgba(2, 2, 2, 0.12) 30%, rgba(2, 2, 2, 0.5) 100%),
+            url('../assets/reports_background_BG_desktop.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .reports-page>* {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ---------- Editorial cover hero ---------- */
     .report-hero {
-        max-width: 1080px;
-        margin: 32px auto 40px;
+        max-width: 1120px;
+        margin: 40px auto 56px;
         aspect-ratio: 21 / 9;
     }
 
-    .report-title {
-        font-size: 40px;
+    .report-hero-content {
+        padding: 56px 64px;
     }
 
+    .report-eyebrow {
+        font-size: 12px;
+        letter-spacing: 0.25em;
+        margin-bottom: 14px;
+    }
+
+    .report-title {
+        font-size: 48px;
+        margin-bottom: 14px;
+    }
+
+    .report-meta-row {
+        font-size: 14px;
+    }
+
+    /* ---------- Body / vertical rhythm ---------- */
     .reports-body {
-        max-width: 1080px;
+        max-width: 1120px;
         margin: 0 auto;
         padding: 0 48px;
+        gap: 64px;
     }
 
+    /* ---------- Signature Style Identity ---------- */
     .identity-card {
-        padding: 48px;
+        padding: 56px 64px;
     }
 
+    .identity-text {
+        font-size: 32px;
+        max-width: 640px;
+    }
+
+    .identity-desc {
+        font-size: 16px;
+        max-width: 620px;
+    }
+
+    /* ---------- Color Analysis: two-column composition ---------- */
+    .color-analysis-card {
+        padding: 44px 56px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        align-items: start;
+    }
+
+    .color-block:first-child {
+        padding-right: 56px;
+        border-right: 1px solid var(--glass-border);
+    }
+
+    .color-analysis-card .swatch-row.mb-4 {
+        margin-bottom: 0;
+    }
+
+    .subsection-title {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .color-swatch-lg {
+        width: 60px;
+        height: 60px;
+    }
+
+    .color-swatch-sm {
+        width: 40px;
+        height: 40px;
+    }
+
+    .swatch-row {
+        gap: 22px;
+    }
+
+    .swatch-hex {
+        font-size: 11px;
+    }
+
+    /* ---------- Styling Guidance: recommendation pair ---------- */
     .dossier-grid {
-        gap: 24px;
+        gap: 32px;
+    }
+
+    .dossier-col {
+        padding: 36px 40px;
+    }
+
+    .col-header {
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
+
+    .dossier-list li {
+        font-size: 14.5px;
+        margin-bottom: 16px;
+        line-height: 1.6;
+    }
+
+    /* ---------- Ideal Fabrics ---------- */
+    .fabric-scroll {
+        gap: 14px;
+        padding: 4px 4px 12px;
+    }
+
+    .fabric-pill {
+        padding: 14px 30px;
+        font-size: 13px;
+    }
+
+    /* ---------- Actions: refined, contained closing CTA ---------- */
+    .report-actions {
+        max-width: 440px;
+        margin: 16px auto 0;
+        padding: 40px 12px 4px;
     }
 }

@@ -61,26 +61,30 @@ export const Reports: React.FC = () => {
                     <div className="report-section">
                         <SectionHeader title="Color Analysis" icon="Sun" />
                         <Card variant="glass" className="color-analysis-card">
-                            <h4 className="subsection-title">Power Colors</h4>
-                            <div className="swatch-row mb-4">
-                                {report.colors.best.map(c => (
-                                    <div key={c} className="swatch-item">
-                                        <div className="color-swatch-lg" style={{ background: c }} />
-                                        <span className="swatch-hex">{c.toUpperCase()}</span>
-                                    </div>
-                                ))}
+                            <div className="color-block">
+                                <h4 className="subsection-title">Power Colors</h4>
+                                <div className="swatch-row mb-4">
+                                    {report.colors.best.map(c => (
+                                        <div key={c} className="swatch-item">
+                                            <div className="color-swatch-lg" style={{ background: c }} />
+                                            <span className="swatch-hex">{c.toUpperCase()}</span>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
 
-                            <h4 className="subsection-title text-muted">Colors to Avoid</h4>
-                            <div className="swatch-row avoid-row">
-                                {report.colors.avoid.map(c => (
-                                    <div key={c} className="swatch-item">
-                                        <div className="color-swatch-sm" style={{ background: c }}>
-                                            <X size={11} aria-hidden="true" />
+                            <div className="color-block">
+                                <h4 className="subsection-title text-muted">Colors to Avoid</h4>
+                                <div className="swatch-row avoid-row">
+                                    {report.colors.avoid.map(c => (
+                                        <div key={c} className="swatch-item">
+                                            <div className="color-swatch-sm" style={{ background: c }}>
+                                                <X size={11} aria-hidden="true" />
+                                            </div>
+                                            <span className="swatch-hex muted">{c.toUpperCase()}</span>
                                         </div>
-                                        <span className="swatch-hex muted">{c.toUpperCase()}</span>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </Card>
                     </div>
