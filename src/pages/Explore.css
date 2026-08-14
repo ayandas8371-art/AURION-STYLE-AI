@@ -264,8 +264,55 @@
         font-size: 60px;
     }
 
+    /* Switch to flexbox for the collection grid. Grid's repeat(4,1fr)
+       reserved an empty 4th cell whenever the item count wasn't a
+       multiple of 4 (7 items -> row two's 3 cards hugging the left with
+       a visible gap on the right). flex-wrap + justify-content:center
+       keeps the same 4-per-row width/gap math but centers any
+       incomplete trailing row instead of leaving it looking unfinished. */
     .explore-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px;
         max-width: 1400px;
         padding: 0 48px;
+    }
+
+    .explore-card {
+        flex: 0 1 calc(25% - 24px);
+        min-width: 260px;
+        height: auto;
+        padding: 16px;
+    }
+
+    .explore-card:hover {
+        border-color: rgba(212, 175, 55, 0.55);
+    }
+
+    .explore-card:hover .explore-img-container img {
+        transform: scale(1.05);
+    }
+
+    .explore-img-container {
+        border-radius: 14px;
+    }
+
+    .explore-details {
+        padding: 16px 12px 8px;
+    }
+
+    .explore-brand {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+    }
+
+    .explore-title {
+        font-size: 22px;
+        margin-bottom: 10px;
+    }
+
+    .explore-price {
+        font-size: 15px;
     }
 }

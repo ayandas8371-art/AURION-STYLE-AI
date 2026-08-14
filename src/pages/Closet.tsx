@@ -64,9 +64,14 @@ export const Closet: React.FC = () => {
                             </div>
                         </Card>
                     ))}
-                    {/* Duplicate for visual fullness */}
+                    {/* Duplicate cards for mobile visual fullness only - hidden on
+                        desktop (.closet-item-duplicate, see Closet.css) since a
+                        premium wardrobe grid shouldn't pad itself out with fake
+                        placeholder data; the 4 real outfits above are enough at
+                        desktop widths. Left in place so the mobile grid density
+                        that's already approved is untouched. */}
                     {allOutfits.map(outfit => (
-                        <Card key={`${outfit.id}-dup`} variant="solid" padding="none" className="closet-item">
+                        <Card key={`${outfit.id}-dup`} variant="solid" padding="none" className="closet-item closet-item-duplicate">
                             <div className="item-image">
                                 <div className="placeholder-art" style={{ background: '#1A1A1A' }}>👔</div>
                                 <button className="delete-btn">

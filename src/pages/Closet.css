@@ -150,7 +150,10 @@
        element in some engines) is what caused the earlier heavy left/right
        crop. `contain` here also keeps the full supplied artwork visible
        instead of cropping it to fill the frame - any letterboxed space
-       reveals the theme's existing near-black app background behind it. */
+       reveals the theme's existing near-black app background behind it. A
+       restrained top/bottom gradient keeps the showroom photo from
+       outshining the wardrobe cards, matching the treatment already used on
+       Reports/Profile. */
     .closet-page::before {
         content: '';
         position: fixed;
@@ -160,7 +163,9 @@
         width: 100%;
         max-width: 1920px;
         height: 100vh;
-        background-image: url('../assets/Closet_background_BG_edsktop.png');
+        background-image:
+            linear-gradient(180deg, rgba(2, 2, 2, 0.4) 0%, rgba(2, 2, 2, 0.15) 30%, rgba(2, 2, 2, 0.5) 100%),
+            url('../assets/Closet_background_BG_edsktop.png');
         background-repeat: no-repeat;
         background-size: contain;
         background-position: center;
@@ -173,25 +178,92 @@
         z-index: 1;
     }
 
+    /* ---------- Hero: campaign header, text anchored to the image ---------- */
     .closet-hero {
-        height: 320px;
+        height: 340px;
         border-radius: 24px;
+        border: 1px solid var(--glass-border);
         padding: 2.5rem 3rem;
         margin-bottom: 3rem;
+        box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.8);
     }
 
     .closet-hero h1 {
-        font-size: 40px;
+        font-size: 42px;
     }
 
-    .closet-grid {
-        grid-template-columns: repeat(5, 1fr);
-        gap: 24px;
+    .closet-hero p {
+        font-size: 15px;
     }
-}
 
-@media (min-width: 1024px) and (max-width: 1279px) {
+    /* ---------- Filters ---------- */
+    .filter-scroll {
+        gap: 14px;
+        overflow-x: visible;
+        flex-wrap: wrap;
+    }
+
+    .filter-chip {
+        padding: 10px 22px;
+        font-size: 13.5px;
+    }
+
+    /* ---------- Wardrobe grid ----------
+       The page only has 4 real curated outfits (see Closet.tsx - the
+       mobile-only duplicate placeholder cards are hidden below via
+       .closet-item-duplicate rather than padding the desktop grid with
+       fake data). flex-wrap + justify-content:center sized for 4-per-row
+       means those 4 real items form one deliberate, complete row instead
+       of a fixed 5-column grid reserving an empty trailing cell. */
     .closet-grid {
-        grid-template-columns: repeat(4, 1fr);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 28px;
+    }
+
+    .closet-item-duplicate {
+        display: none;
+    }
+
+    /* Compound selector (.closet-grid .closet-item) so this reliably beats
+       Card.tsx's own .card-solid background/border regardless of CSS
+       bundle order - both are single-class selectors otherwise, which
+       would make the winner order-dependent. */
+    .closet-grid .closet-item {
+        flex: 0 1 calc(25% - 21px);
+        min-width: 260px;
+        background: var(--glass-bg);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .closet-item:hover {
+        transform: translateY(-4px);
+        border-color: rgba(212, 175, 55, 0.5);
+        box-shadow: 0 16px 40px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    .closet-item:hover .item-image img {
+        transform: scale(1.05);
+    }
+
+    .item-image img {
+        transition: transform 0.5s ease;
+    }
+
+    .item-details {
+        padding: 20px;
+    }
+
+    .item-title {
+        font-size: 16px;
+    }
+
+    .item-meta {
+        font-size: 12px;
+        letter-spacing: 0.03em;
     }
 }
