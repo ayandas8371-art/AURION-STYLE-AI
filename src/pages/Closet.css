@@ -139,11 +139,38 @@
         max-width: 1400px;
         margin: 0 auto;
         padding: 40px 48px 64px;
+        position: relative;
+    }
+
+    /* Fixed, viewport-sized layer so `background-size` is computed against a
+       stable box (the viewport) instead of this page's full scrollable
+       content height. .closet-page can be 2000px+ tall once the wardrobe
+       grid renders; sizing `cover`/`contain` against that tall box (which is
+       what background-attachment:fixed does directly on a variable-height
+       element in some engines) is what caused the earlier heavy left/right
+       crop. `contain` here also keeps the full supplied artwork visible
+       instead of cropping it to fill the frame - any letterboxed space
+       reveals the theme's existing near-black app background behind it. */
+    .closet-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 1920px;
+        height: 100vh;
         background-image: url('../assets/Closet_background_BG_edsktop.png');
         background-repeat: no-repeat;
-        background-size: cover;
-        background-position: center top;
-        background-attachment: fixed;
+        background-size: contain;
+        background-position: center;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .closet-page>* {
+        position: relative;
+        z-index: 1;
     }
 
     .closet-hero {
