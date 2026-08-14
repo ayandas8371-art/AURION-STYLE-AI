@@ -443,34 +443,184 @@
    Desktop composition (Layout `wide`). Mobile rules above are untouched.
    ========================================================================== */
 @media (min-width: 1024px) {
+
+    /* Base page: no direct background here anymore - see .profile-page::before
+       below. The page's own box grows to the full scrollable content height
+       (header + stats + plans + settings + support easily exceeds 1500px),
+       and background-attachment:fixed + background-size:cover computed
+       against that tall box - not the viewport - is what made the backdrop
+       feel oversized/zoomed and "louder" than the content. Same underlying
+       issue as the Closet page background. */
     .profile-page {
+        background-image: none;
+        background-color: var(--color-black);
+        position: relative;
+    }
+
+    .profile-page::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        max-width: 1920px;
+        height: 100vh;
         background-image:
-            linear-gradient(180deg, rgba(2, 2, 2, 0.55) 0%, rgba(2, 2, 2, 0.2) 38%, rgba(2, 2, 2, 0.6) 100%),
+            linear-gradient(180deg, rgba(2, 2, 2, 0.6) 0%, rgba(2, 2, 2, 0.25) 40%, rgba(2, 2, 2, 0.65) 100%),
             url('../assets/Profile_background_BG_desktop.png');
+        background-repeat: no-repeat;
         background-size: cover;
         background-position: top center;
+        pointer-events: none;
+        z-index: 0;
     }
 
+    .profile-page>* {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Shared desktop content column. Wide enough to compose two plan cards
+       and a real settings panel side by side; still well short of the full
+       1920px canvas so the page keeps an editorial, non-full-bleed feel. */
+    .profile-header,
+    .stats-row,
+    .profile-section {
+        max-width: 1040px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* ---------- Profile identity ---------- */
     .profile-header {
-        max-width: 720px;
-        margin: 0 auto;
-        padding-top: 56px;
+        padding: 72px 24px 40px;
     }
 
+    .avatar-circle {
+        width: 132px;
+        height: 132px;
+        border-width: 3px;
+    }
+
+    .avatar-glow {
+        width: 210px;
+        height: 210px;
+    }
+
+    .avatar-container {
+        margin-bottom: 24px;
+    }
+
+    .profile-name {
+        font-size: 42px;
+        margin-bottom: 8px;
+    }
+
+    .profile-email {
+        font-size: 15px;
+        margin-bottom: 20px;
+    }
+
+    .member-badge {
+        padding: 8px 20px;
+        font-size: 13px;
+    }
+
+    /* ---------- Statistics ---------- */
     .stats-row {
-        max-width: 720px;
-        margin: 0 auto 30px;
+        margin-bottom: 40px;
+        padding: 28px 48px;
         border-radius: var(--radius-lg);
         border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
+    .stat-value {
+        font-size: 28px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+        letter-spacing: 1px;
+    }
+
+    .stat-divider {
+        height: 40px;
+    }
+
+    /* ---------- Sections shared ---------- */
     .profile-section {
-        max-width: 720px;
-        margin: 0 auto 40px;
+        margin-bottom: 56px;
+    }
+
+    .section-title {
+        font-size: 14px;
+        margin-bottom: 24px;
+    }
+
+    .settings-group+.section-title {
+        margin-top: 56px;
+    }
+
+    /* ---------- Membership plans ---------- */
+    .plans-carousel {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px;
+        overflow: visible;
+        padding: 8px 0 24px;
     }
 
     .gold-pill-card {
-        flex: 0 0 30%;
-        width: 30%;
+        width: auto;
+        flex: none;
+        min-height: 420px;
+        padding: 48px 36px;
+    }
+
+    .pill-title {
+        font-size: 13px;
+        margin-bottom: 20px;
+        padding-bottom: 16px;
+    }
+
+    .pill-price {
+        font-size: 34px;
+        margin: 20px 0;
+    }
+
+    .pill-features {
+        gap: 16px;
+        margin-bottom: 36px;
+    }
+
+    .pill-features li {
+        font-size: 14px;
+    }
+
+    .pill-button {
+        width: 70%;
+        padding: 14px 16px;
+        font-size: 13px;
+    }
+
+    /* ---------- Settings / Support panels ---------- */
+    .settings-group {
+        border-radius: var(--radius-lg);
+    }
+
+    .settings-item {
+        padding: 20px 28px;
+    }
+
+    .settings-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        margin-right: 16px;
+    }
+
+    .settings-label {
+        font-size: 15px;
     }
 }
